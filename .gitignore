@@ -1,7 +1,7 @@
 # 環境設定ファイル
-3createtool/.env
+.env
 
 # ログフォルダ
-3createtool/logs
+*.logs
 
 node_modules/

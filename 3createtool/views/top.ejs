@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>トップ画面</title>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body>
+  <header>
+    <a href="/new_form" class="form">新規３coumn登録</a>
+    <h1 class="login">3columnツール</h1>
+    <a href="/login" class="form">ログアウト</a>
+  </header>
+
+  <% if (typeof error!=='undefined' ) { %>
+    <script>
+      alert("編集画面を取得できませんでした")
+    </script>
+    <% } %>
+
+      <div class="search">
+        <input type="text" id="search" name="search" class="search_title" placeholder="タイトルを入力してください(部分一致検索可能)">
+        <input type="hidden" name="userid" id="userid" value="<%= userid %>">
+        <button type="click" class="button_search" id="search_button">検索</button>
+        <button type="click" class="button_search_release" name="release" value="true"
+          id="release_button">検索を解除</button>
+      </div>
+      <div class="sort">
+        <button type="button" id="sort_button">年月で絞り込む</button>
+        <button type="button" id="sort_release">絞り込みを解除</button>
+        <% if(filter!==undefined){ %>
+          <input type="hidden" id="filter" value="<%=filter%>">
+          <%}%>
+      </div>
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn" id="close-btn">&times;</span>
+          <h4>年と月を選択</h4>
+
+          <select id="year" name="year">
+          </select>
+
+          <select id="month" name="month">
+            <option value="none">なし</option>
+          </select>
+
+          <button type="button" id="submit-btn">検索</button>
+        </div>
+      </div>
+      <ul class="table-body">
+        <% Object.keys(date).forEach((dateKey)=> { %>
+          <!-- 日付ごとの見出し -->
+          <li class="date-header">
+            <p>
+              <%= dateKey %>
+            </p>
+          </li>
+          <div class="slider-container">
+            <button class="prev-btn" type="button" id="prevbtn">◀</button>
+            <button class="next-btn" type="button" id="nextbtn">▶</button>
+            <div class="slide-wrapper">
+              <div class="test" id="slide">
+                <% date[dateKey].forEach((memo)=> { %>
+                  <!-- 各メモの表示 -->
+                  <li class="slide-items">
+                    <div class="item-container" onclick="location.href='/memo/<%= memo.id %>'">
+                      <div class="top-data-title">
+                        <%= memo.title %>
+                          <% if(memo.name!==undefined){%>
+                            <input type="hidden" value="<%=memo.name%>" id="rel">
+                            <%} %>
+                      </div>
+                    </div>
+                  </li>
+                  <% }); %>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+      </ul>
+      <div id="pagination" class="pagination"></div>
+      <% if (typeof current!=='undefined' ) { %>
+        <input type="hidden" id="current" value="<%=current%>">
+        <%}%>
+          <% if (typeof total!=='undefined' ) { %>
+            <input type="hidden" id="total" value="<%=total%>">
+            <%}%>
+              <script>
+                //タイトル検索
+                document.getElementById("search_button").addEventListener('click', async (event) => {
+                  const search_result = document.getElementById("search").value
+                  if (search_result === "") {
+                    return alert("空白です")
+                  }
+                  try {
+                    const response = await fetch(`/search?search=${search_result}`, {
+                      method: "get",
+                      headers: { "content-type": "application/json" },
+                    })
+                    const result = await response.json()
+                    if (response.ok) {
+                      if (result.message){
+                        alert(result.message)
+                        window.location.href = `/search_result?message=${result.message}`
+                        return;
+                      }
+                      window.location.href = '/search_result'
+                    } else {
+                      console.error('エラーが発生しました:', result.message);
+                      alert(result.message)
+                    }
+                  } catch (error) {
+                    console.error('エラーが発生しました:', error);
+                    alert('通信エラーが発生しました。再試行してください。');
+                  }
+
+                })
+                //スライド操作
+                document.addEventListener("DOMContentLoaded", function () {
+                  document.querySelectorAll('.slider-container').forEach((test) => {
+                    const item = test.querySelector('.test');
+                    const right = test.querySelector('.next-btn');
+                    const left = test.querySelector('.prev-btn');
+                    function update() {
+                      if (item.scrollLeft === 0) {
+
+                        left.style.display = "none";
+
+                      } else {
+                        left.style.display = "block"
+                      }
+                      if (item.scrollLeft + item.clientWidth >= item.scrollWidth - 1) {
+                        right.style.display = "none";
+
+                      } else {
+                        right.style.display = "block";
+                      }
+                    }
+                    if (item.clientWidth < item.scrollWidth) {
+                      right.style.display = "block"
+                    } else {
+                      right.style.display = "none"
+                    }
+                    right.addEventListener("click", () => {
+                      item.scrollLeft += 200
+                    })
+                    left.addEventListener("click", () => {
+                      item.scrollLeft -= 200
+                    })
+                    item.addEventListener("scroll", update);
+                  })
+                })
+                //年月で絞り込むときのモーダル操作
+                const sortButton = document.getElementById("sort_button");
+                const sortRelease = document.getElementById("sort_release");
+                document.addEventListener("DOMContentLoaded", () => {
+                  const modal = document.getElementById("modal");
+                  const closeButton = document.getElementById("close-btn");
+                  const submitButton = document.getElementById("submit-btn");
+                  sortRelease.style.display = "none";
+                  sortButton.addEventListener("click", function () {
+                    modal.style.display = "flex";
+                  });
+                  closeButton.addEventListener("click", function () {
+                    modal.style.display = "none";
+                  });
+                  //年追加
+                  const select_year = document.getElementById("year");
+                  const currentYear = new Date().getFullYear();
+                  for (let i = 0; i < 5; i++) {
+                    const option = document.createElement("option");
+                    option.value = currentYear - i
+                    option.textContent = currentYear - i
+                    select_year.appendChild(option)
+                  }
+                  //月追加
+                  const select_month = document.getElementById("month");
+                  for (let i = 1; i <= 12; i++) {
+                    const option = document.createElement("option");
+                    if (i !== 10 || i !== 11 || i !== 12) option.value = `0${i}`
+                    else option.value = i
+                    option.textContent = `${i}月`
+                    select_month.appendChild(option);
+                  }
+                  //年月検索
+                  submitButton.addEventListener("click", async (event) => {
+                    try {
+                      const year = document.getElementById("year").value;
+                      const month = document.getElementById("month").value;
+                      const queryParams = new URLSearchParams({ year, month })
+                      const response = await fetch(`/searchDate?${queryParams}`, {
+                        method: "get",
+                        headers: { "content-type": "application/json" },
+                      })
+                      const result = await response.json();
+                      if (response.ok) {
+                        queryParams.set('filter', 'true');
+                        window.location.href = `/search_result?${queryParams.toString()}`
+
+                      } else {
+                        console.error('エラーが発生しました:', result.message);
+                        alert(result.message || "エラーが発生しました")
+                      }
+                      modal.style.display = "none";
+                    } catch (error) {
+                      console.error('エラーが発生しました:', error);
+                      alert('通信エラーが発生しました。再試行してください。');
+                    }
+                  });
+                  //タイトル検索ボタンの表示
+                  if (document.getElementById("filter").value === "true") {
+                    const search = document.getElementById("search");
+                    const search_button = document.getElementById("search_button")
+                    search.style.display = "none";
+                    search_button.style.display = "none";
+                    sortButton.style.display = "none";
+                    sortRelease.style.display = "inline-block";
+                  } else {
+                    sortButton.style.display = "inline-block";
+                    sortRelease.style.display = "none";
+                  }
+                  const rel = document.getElementById("rel");
+                  const rel_button = document.getElementById("release_button")
+                  if (rel && rel.value === "release") {
+                    const sort_button = document.getElementById("sort_button")
+                    sort_button.style.display = "none"
+                    const search = document.getElementById("search_button")
+                    search.style.display = "none";
+                    rel_button.style.display = "inline";
+                    document.getElementById("search").readOnly = true
+                  }
+                  rel_button.addEventListener('click', async (event) => {
+                    document.getElementById("search").readOnly = false
+                    window.location.href = "/top"
+
+                  })
+                })
+                sortRelease.addEventListener('click', () => {
+                  window.location.href = "/top"
+                })
+                window.addEventListener("click", function (event) {
+                  if (event.target === modal) {
+                    modal.style.display = "none";
+                  }
+                });
+                //ページネーション
+                const pagination = document.getElementById("pagination")
+                const current = Number(document.getElementById("current").value);
+                const total = Number(document.getElementById("total").value);
+                const pageTotalCount = Math.ceil(total / 10);
+                for (let i = 1; i <= pageTotalCount; i++) {
+                  const page_button = document.createElement("button");
+                  page_button.textContent = i;
+                  pagination.appendChild(page_button);
+                  if (i === current) { page_button.classList.add("active"); }
+                  page_button.addEventListener('click', (event) => {
+                    window.location.href = `/top?page=${encodeURIComponent(i)}`
+
+                  })
+                }
+              </script>
+</body>
+
+</html>

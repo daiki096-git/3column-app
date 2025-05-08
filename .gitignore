@@ -1,0 +1,10 @@
+# 環境設定ファイル
+3createtool/.env
+
+# ログフォルダ
+3createtool/logs
+
+#設定ファイル
+3createtool/config
+
+node_modules/

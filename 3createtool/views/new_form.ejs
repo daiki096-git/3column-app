@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>3コラ新規作成画面</title>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body>
+  <header>
+    <h1 class="login">3columnツール</h1>
+    <a href="/top" class="form">一覧に戻る</a>
+    <a href="/login" class="form">ログアウト</a>
+  </header>
+  <div class="column-container">
+    <ul class="table-body">
+      <li>
+        <div class="item-all">
+          <div class="item-data">
+            <div class="main_name">
+              <label for="message">①具体的場面</label>
+            </div>
+            <div class="title">
+              <textarea id="title" name="title" class="text_title" placeholder="タイトルを入力してください
+(例)会社のプレゼン前"></textarea>
+            </div>
+            <div class="top-data">
+              <label for="message">(出来事の日付を選択してください)</label>
+            </div>
+            <div class="title">
+              <input type="date" id="datePicker" name="date" class="text_title_date">
+            </div>
+            <div class="title">
+              <textarea id="where" name="title" rows="2" cols="25" class="text_title" placeholder="出来事の場所を入力してください
+(例)自宅で"></textarea>
+            </div>
+            <div class="title">
+              <textarea id="who" name="title" rows="2" cols="25" class="text_title" placeholder="誰との出来事か入力してください
+(例)一人で"></textarea>
+            </div>
+            <div class="content">
+              <div class="content">
+                <textarea id="content" name="content" rows="4" cols="50" class="text_content"
+                  placeholder="出来事の具体的な状況を入力してください
+(例)まだ作成できていない資料の説明をしなければならないことを考えながらソファに座っているとき"></textarea>
+              </div>
+            </div>
+            <input type="hidden" id="per_id_1">
+            <input type="hidden" id="per_id_2">
+            <input type="hidden" id="per_id_3">
+            <input type="hidden" id="per_id_4">
+            <input type="hidden" id="per_id_5">
+            <input type="hidden" id="per_id_6">
+            <input type="hidden" id="per_id_7">
+            <input type="hidden" id="per_id_8">
+            <input type="hidden" id="per_id_9">
+            <input type="hidden" id="per_id_10">
+            <div class="main_name">
+              <label for="message">②気分・感情とその強度(％)</label>
+              <a href="" class="feel_express" id="feel_express">気分・感情の表現一覧(思い浮かばない人向け)</a>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <!--   <input type="text" id="searchInput" placeholder="気分・感情を選択してください" onkeyup="filterOptions()">-->
+                <input type="text" id="feeling1" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <input type="text" id="feeling2" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per_2" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <input type="text" id="feeling3" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per_3" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <input type="text" id="feeling4" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per_4" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <input type="text" id="feeling5" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per_5" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+            <div class="main_name">
+              <label for="message">③認知(考え・イメージ)とその確信度(％)</label>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <input type="text" id="autothink1" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per_6" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <input type="text" id="autothink2" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per_7" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <input type="text" id="autothink3" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per_8" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <input type="text" id="autothink4" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per_9" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+            <div class="row_write">
+              <div class="dropdown">
+                <input type="text" id="autothink5" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
+                <div id="dropdownContent" class="dropdown-content"></div>
+              </div>
+              <select id="per_10" class="per" placeholder="％を選択してください" name="per"></select>
+            </div>
+          </div>
+          <div class="main_name">
+            <label for="message">④身体的反応</label>
+          </div>
+          <div class="title">
+            <textarea id="physical" name="physical" rows="2" cols="25" class="text_content"
+              placeholder="出来事による身体的反応を入力してください
+(例)動悸、不眠"></textarea>
+          </div>
+          <div class="main_name">
+            <label for="message">⑤実際どうしたか</label>
+          </div>
+          <div class="content">
+            <textarea id="action" name="action_content" rows="4" cols="50" class="text_content"
+              placeholder="出来事に対して実際行った行動を入力してください
+(例)自分を落ち着かせるために入浴した"></textarea>
+          </div>
+          <div class="main_name">
+            <label for="message">⑥気づき</label>
+          </div>
+          <div class="content">
+            <textarea id="notion" name="realize" rows="4" cols="50" class="text_content"
+              placeholder="書いてみて気づいたことを入力してください
+(例)気持ちが落ち着いた"></textarea>
+          </div>
+          <div class="registerbutton">
+            <button type="button" id="register_button" class="button_register">登録</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+</body>
+
+</html>
+<script>
+  //新規登録
+  document.getElementById("register_button").addEventListener('click', async (event) => {
+    const perElements = document.querySelectorAll('select.per');
+    const per = Array.from(perElements).map(select => select.value);
+    const title = document.getElementById("title").value;
+    const date = document.getElementById("datePicker").value;
+    const where = document.getElementById("where").value;
+    const who = document.getElementById("who").value;
+    const content = document.getElementById("content").value;
+    const physical = document.getElementById("physical").value;
+    const action = document.getElementById("action").value;
+    const notion = document.getElementById("notion").value;
+    const feeling1 = document.getElementById("feeling1").value;
+    const feeling2 = document.getElementById("feeling2").value;
+    const feeling3 = document.getElementById("feeling3").value;
+    const feeling4 = document.getElementById("feeling4").value;
+    const feeling5 = document.getElementById("feeling5").value;
+    const autothink1 = document.getElementById("autothink1").value;
+    const autothink2 = document.getElementById("autothink2").value;
+    const autothink3 = document.getElementById("autothink3").value;
+    const autothink4 = document.getElementById("autothink4").value;
+    const autothink5 = document.getElementById("autothink5").value;
+
+    if (title === "" || date === "" || where === "" || who === "" || content === "" || physical === "" || action === "" || feeling1 === "" || autothink1 === "") {
+      return alert("空白があります")
+    }
+    const feelings = [feeling1, feeling2, feeling3, feeling4, feeling5]
+    const autothinks = [autothink1, autothink2, autothink3, autothink4, autothink5]
+    let feeling_obj = {}
+    let autothink_obj = {}
+    feelings.forEach((feeling, i) => {
+      if (feeling !== "") {
+        feeling_obj[feeling] = per[i];
+      }
+    });
+    autothinks.forEach((autothink, i) => {
+      if (autothink !== "") {
+        autothink_obj[autothink] = per[i + 5]
+      }
+    })
+
+
+    const data = { title, date, where, who, content, physical, action, notion, feeling_obj, autothink_obj }
+    try {
+      const response = await fetch('/register', {
+        method: "post",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message);
+        window.location.href = '/top';
+      } else {
+        console.error('エラーが発生しました:', result.message);
+        alert(result.message||"登録に失敗しました")
+      }
+
+    } catch (error) {
+      console.error('エラーが発生しました:', error);
+      alert('通信エラーが発生しました。再試行してください。');
+    }
+  })
+  //パーセンテージ追加
+  const per = document.getElementById("per");
+  const per2 = document.getElementById("per_2");
+  const per3 = document.getElementById("per_3");
+  const per4 = document.getElementById("per_4");
+  const per5 = document.getElementById("per_5");
+  const per6 = document.getElementById("per_6");
+  const per7 = document.getElementById("per_7");
+  const per8 = document.getElementById("per_8");
+  const per9 = document.getElementById("per_9");
+  const per10 = document.getElementById("per_10");
+
+  const per_id_1 = document.getElementById("per_id_1").value;
+  const per_id_2 = document.getElementById("per_id_2").value;
+  const per_id_3 = document.getElementById("per_id_3").value;
+  const per_id_4 = document.getElementById("per_id_4").value;
+  const per_id_5 = document.getElementById("per_id_5").value;
+  const per_id_6 = document.getElementById("per_id_6").value;
+  const per_id_7 = document.getElementById("per_id_7").value;
+  const per_id_8 = document.getElementById("per_id_8").value;
+  const per_id_9 = document.getElementById("per_id_9").value;
+  const per_id_10 = document.getElementById("per_id_10").value;
+
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+    if (option.value === per_id_1) {
+      option.selected = true;
+    }
+    per.appendChild(option);
+  }
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+
+    if (option.value === per_id_2) {
+      option.selected = true;
+    }
+    per2.appendChild(option);
+  }
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+
+    if (option.value === per_id_3) {
+      option.selected = true;
+    }
+    per3.appendChild(option);
+  }
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+    if (option.value === per_id_4) {
+      option.selected = true;
+    }
+    per4.appendChild(option);
+  }
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+    if (option.value === per_id_5) {
+      option.selected = true;
+    }
+    per5.appendChild(option);
+  }
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+    if (option.value === per_id_6) {
+      option.selected = true;
+    }
+    per6.appendChild(option);
+  }
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+    if (option.value === per_id_7) {
+      option.selected = true;
+    }
+    per7.appendChild(option);
+  }
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+    if (option.value === per_id_8) {
+      option.selected = true;
+    }
+    per8.appendChild(option);
+  }
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+    if (option.value === per_id_9) {
+      option.selected = true;
+    }
+    per9.appendChild(option);
+  }
+  for (let i = 0; i <= 100; i++) {
+    const option = document.createElement("option");
+    option.value = i + "%";
+    option.textContent = i + "%";
+    if (option.value === per_id_10) {
+      option.selected = true;
+    }
+    per10.appendChild(option);
+  }
+  const express = document.getElementById("feel_express");
+  express.addEventListener('click', () => {
+    window.open('feel_express.html', "PopupWindow", "width=800,height=1000")
+  })
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>ログイン画面</title>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body>
+  <header>
+    <h1 class="login">3columnツール</h1>
+  </header>
+  <div class="form-group">
+    <div class="form-group-address">
+      <input type="text" placeholder="メールアドレス" id="mail" class="login_box">
+    </div>
+    <div class="form-group-pass">
+      <input type="password" placeholder="パスワード" id="password" class="login_box">
+    </div>
+    <button type="button" class="button_login" id="login_button">ログイン</button>
+  </div>
+  <div class="user_register">
+    <a href="/new_user" class="new_user">新規ユーザー登録がまだの場合はこちら</a>
+  </div>
+  <div class="user_register">
+    <a href="/user_forget" class="user_forget">パスワードまたはユーザー名を忘れた場合はこちら</a>
+  </div>
+  <script>
+    //ログイン認証
+    const button = document.getElementById('login_button')
+    button.addEventListener("click", async (event) => {
+      const mail = document.getElementById("mail").value
+      const password = document.getElementById("password").value
+      const data = { mail, password }
+      try {
+        const response = await fetch('/top', {
+          method: "post",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(data)
+        })
+        const result = await response.json();
+        if (response.ok) {
+          const flag = true
+          const page = 1
+          window.location.href = `/top?flag=${encodeURIComponent(flag)}&page=${encodeURIComponent(page)}`
+        } else {
+          console.error('エラーが発生しました', result.message || "");
+          alert(result.message || "認証に失敗しました")
+        }
+      } catch (error) {
+        console.error('エラーが発生しました:', error);
+        alert('通信エラーが発生しました。再試行してください。');
+      }
+    })
+  </script>
+</body>
+
+</html>

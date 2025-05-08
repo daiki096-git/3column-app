@@ -1,0 +1,502 @@
+.main-container {
+  display: flex;
+  margin-left: 440px;
+}
+
+.column-container {
+  width: 80%;              /* 必要に応じて 600px や max-width を指定してもOK */
+  margin-right:16%;         /* 左右中央に配置 */
+  margin-left: 30%;   
+  padding: 5px;
+}
+
+
+textarea::placeholder {
+  font-size: 12px; /* フォントサイズを小さく */
+  color: rgba(0, 0, 0, 0.5); /* 色を薄く（透明度0.5） */
+}
+
+header {
+  position: relative;
+  background-color: #dff6ff;
+  height: 80px;
+}
+
+.button_login {
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.button_login_user {
+  margin-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+
+}
+
+.login_box {
+  padding: 10px;
+  width: 250px;
+}
+
+.login,
+.memo {
+  position: absolute;
+  font-size: 30px;
+  padding-top: 5px;
+  padding-left: 30px;
+  padding-bottom: 20px;
+  color: #003366;
+  font-size: 20px;
+  margin-top: 20px;
+
+
+}
+
+.form-group {
+
+  text-align: center;
+  padding-top: 200px;
+  padding-bottom: 10px;
+}
+
+.user_register {
+  text-align: center;
+}
+
+.user_content {
+  text-align: center;
+  margin-top: 100px;
+
+}
+
+.date-header p {
+  text-decoration: underline;
+  font-size: 15px;
+}
+
+.name {
+  font-size: 15px;
+}
+.top-data{
+  color: rgba(0, 0, 0, 0.7);
+  font-size:14px
+}
+.top-data-title{
+  color: rgba(0, 0, 0, 1.0);
+  font-size:14px
+
+}
+.main_name {
+  color: #1a1a2e; 
+  font-weight: 500; 
+  font-size: 5px; 
+  display: block;
+  margin-bottom: 2px; /* 下の余白を少し広げる */
+  white-space: nowrap;
+  letter-spacing: 0.5px; /* 文字間隔を少し広げる */
+}
+.form-group-address {
+  padding-bottom: 20px;
+}
+
+.form-group-pass {
+  padding-bottom: 20px;
+}
+
+.search {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.form {
+  float: right;
+  font-size: 15px;
+  padding-right: 20px;
+  padding-top: 30px
+}
+
+.alert {
+  color: red;
+}
+
+.item-menu {
+  display: flex;
+  margin-left: 10px;
+}
+
+
+.table-body li {
+  display: flex;
+  margin-bottom: 10px;
+  list-style: none;
+
+}
+
+.text_title_date {
+  width: 500px;
+  padding-bottom: 20px;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.text_title {
+  width: 500px;
+  padding-bottom: 20px;
+  height: 20px;
+}
+
+.text_content {
+  width: 500px;
+  height: 50px;
+}
+
+.text_response{
+  width: 500px;
+  height: 30px;
+
+
+}
+.date-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+
+}
+
+.slide-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 800px;
+
+}
+
+.slide-wrapper {
+  overflow: hidden;
+  width: 90%;
+  max-width: 100%;
+
+
+}
+
+.slide-item {
+  flex: 0 0 auto;
+  min-width: 200px;
+  margin-right: 10px;
+  text-align: center
+}
+
+.test {
+
+  display: flex;
+  gap: 10px;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  overflow: hidden;
+  margin-right: 20px;
+
+
+
+
+}
+
+.item-container {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+
+}
+
+.item-container:hover {
+  background-color: #d6d6d6
+}
+
+.item-container:active {
+  transform: scale(0.95);
+}
+
+.error_word {
+
+  font-size: red;
+}
+
+.prev-btn,
+.next-btn {
+  background: #ddd;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: absolute;
+  z-index: 10;
+  margin-top: 20px
+}
+
+.prev-btn {
+  left: 0;
+  display: none;
+}
+
+.next-btn {
+  right: 0;
+  margin-right: 20px;
+
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+
+.searchInput {
+  width: 400px;
+  padding: 10px;
+  box-sizing: border-box;
+
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-content div:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
+
+.per {
+  width: 100px;
+  height: 40px;
+  margin-left: 200px
+}
+
+.per_edit {
+  width: 100px;
+  height: 40px;
+}
+
+.think_wrapper {
+  width: 1000px;
+
+}
+
+.search_title {
+  font-size: 15px;
+  padding: 10px;
+  width: 500px;
+
+}
+
+.main_name {
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.feel_container {
+  display: inline-block;
+}
+
+.text_title_select {
+  padding: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 510px;
+}
+
+.text_title_feel {
+  width: 500px;
+  height: 30px;
+}
+
+.button_update {
+  margin-left: 350px;
+  margin-top: 40px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 10px;
+
+}
+
+.button_register {
+  margin-left: 440px;
+  margin-top: 30px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 10px;
+
+}
+
+.button_delete {
+  margin-top: 40px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+.button_container {
+  display: flex;
+}
+
+.button_search {
+  padding: 10px;
+}
+
+.button_search_release {
+  padding: 10px;
+  display: none;
+}
+
+.row_write {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 700px;
+
+}
+
+.feel_express {
+  font-size: 15px;
+}
+
+.sendmail {
+  margin-top: 10px;
+}
+
+.new_user,
+.user_forget {
+  font-size: 10px;
+}
+
+#sort_button,#sort_release{
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  margin-left: 30px;
+}
+
+#sort_button:hover,#sort_release:hover {
+  background-color: lightgray;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal-content select {
+  font-size: 18px;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  margin-left:40px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: #f0f0f0;
+  cursor: pointer;
+  font-size:15px;
+}
+
+.pagination button.active {
+  background: #ddd;
+  font-weight: bold;
+}

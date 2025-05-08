@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>3コラ編集画面</title>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body>
+  <header>
+    <h1 class="login">3columnツール</h1>
+    <a href="/top" class="form">一覧に戻る</a>
+    <a href="/login" class="form">ログアウト</a>
+  </header>
+  <div class="column-container">
+    <ul class="table-body">
+      <% memo.forEach((memo)=> { %>
+        <li>
+          <div class="item-all">
+            <div class="situation">
+              <div class="item-data">
+                <div class="main_name">
+                  <label for="message">①具体的場面</label>
+                </div>
+                <div class="top-data">
+                  <label for="title">(登録日時)</label>
+                </div>
+                <span class="register-time" id="date-time" name="created_at">
+                  <%= memo.created_at %>
+                </span>
+                <input type="hidden" name="created_at" value="<%= memo.created_at %>">
+                <div class="top-data">
+                  <label for="title">(タイトル)</label>
+                </div>
+                <textarea name="title" id="title" class="text_title" rows="2" cols="25"><%=memo.title%></textarea>
+                <div class="top-data">
+                  <label for="title">(いつ)</label>
+                </div>
+                <input class="text_title_date" id="datePicker" name="date" type="date" value="<%=date %>">
+              </div>
+              <div class="top-data">
+                <label for="title">(どこで)</label>
+              </div>
+              <textarea name="place" id="where" class="text_title" rows="2" cols="25"><%=memo.place%></textarea>
+              <div class="top-data">
+                <label for="title">(誰と)</label>
+              </div>
+              <textarea name="who" id="who" class="text_title" rows="2" cols="25"><%=memo.who%></textarea>
+              <div class="top-data">
+                <label for="title">(どんな状況)</label>
+              </div>
+              <textarea name="content" id="content" class="text_content" rows="2" cols="25"><%=memo.content%></textarea>
+            </div>
+
+            <div class="main_name">
+              <label for="message">②気分・感情とその強度(％)</label>
+              <a href="" class="feel_express" id="feel_express">気分・感情の表現一覧(思い浮かばない人向け)</a>
+            </div>
+            <%for(let i=0;i< 5;i++){ %>
+              <div class="row">
+                <textarea name="memo_feeling" id="feeling<%=i+1%>" class="text_title_feel" placeholder="気分・感情を入力してください"
+                  rows="2" cols="25"><%= feel[i]?.feeling || '' %></textarea>
+                <% let feeling_per_default=(feel[i]?.feelingPer ||0)+"%" %>
+                  <select id="feeling_per" class="per_edit" name="memo_feeling_per">
+                    <% for (let j=0; j <=100; j++) { %>
+                      <option value="<%= j + '%' %>" <% if (j + '%'===feeling_per_default) { %>
+                        selected
+                        <% } %>>
+                          <%= j + '%' %>
+                      </option>
+                      <% } %>
+                  </select>
+              </div>
+              <% } %>
+                <div class="main_name">
+                  <label for="message">③認知(考え・イメージ)とその確信度(％)</label>
+                </div>
+                <% for(let i=0;i< 5;i++){ %>
+                  <div class="row">
+                    <textarea name="memo_autothink" id="autothink<%=i+1%>" placeholder="自動思考を入力してください"
+                      class="text_title_feel" rows="2" cols="25"><%=autothink[i]?.autoThink || ''%></textarea>
+
+                    <% let autothink_per_default=(autothink[i]?.autoThinkPer ||0)+"%"; %>
+                      <select id="autothink_per" class="per_edit" name="memo_autothink_per">
+                        <% for (let j=0; j <=100; j++) { %>
+                          <option value="<%= j + '%' %>" <% if (j + '%'===autothink_per_default) { %>
+                            selected
+                            <% } %>>
+                              <%= j + '%' %>
+                          </option>
+                          <% } %>
+                            </option>
+                      </select>
+                  </div>
+                  <% } %>
+                    <div class="main_name">
+                      <label for="message">④身体的反応</label>
+                    </div>
+                    <textarea name="physical" id="physical" class="text_response" rows="4"
+                      cols="25"><%=memo.physical%></textarea>
+
+                    <div class="main_name">
+                      <label for="message">⑤実際どうしたか</label>
+                    </div>
+                    <textarea name="action_content" id="action" class="text_response" rows="4"
+                      cols="50"><%=memo.action%></textarea>
+                    <div class="main_name">
+                      <label for="message">⑥気づき</label>
+                    </div>
+                    <textarea name="realize" id="notion" class="text_content" rows="4"
+                      cols="50"><%=memo.realize%></textarea>
+                    <div class="button_container">
+                      <input type="hidden" id="memoid" value="<%= memo.id %>">
+                      <button type="button" id="update_button" class="button_update">更新</button>
+                      <button type="button" id="delete_button" class="button_delete">削除</button>
+                    </div>
+          </div>
+  </div>
+  </li>
+  <% }) %>
+    </ul>
+    </div>
+</body>
+</html>
+<script>
+  //更新
+  function formatDateTime() {
+    const now = new Date(document.getElementById("date-time").textContent);
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+  document.getElementById("date-time").textContent = formatDateTime();
+  document.getElementById("update_button").addEventListener('click', async (event) => {
+    const queryParams = encodeURIComponent(document.getElementById("memoid").value);
+    const perElements = document.querySelectorAll('select.per_edit');
+    const per = Array.from(perElements).map(select => select.value);
+    const title = document.getElementById("title").value;
+    const date = document.getElementById("datePicker").value;
+    const where = document.getElementById("where").value;
+    const who = document.getElementById("who").value;
+    const content = document.getElementById("content").value;
+    const physical = document.getElementById("physical").value;
+    const action = document.getElementById("action").value;
+    const notion = document.getElementById("notion").value;
+    const feeling1 = document.getElementById("feeling1").value;
+    const feeling2 = document.getElementById("feeling2").value;
+    const feeling3 = document.getElementById("feeling3").value;
+    const feeling4 = document.getElementById("feeling4").value;
+    const feeling5 = document.getElementById("feeling5").value;
+    const autothink1 = document.getElementById("autothink1").value;
+    const autothink2 = document.getElementById("autothink2").value;
+    const autothink3 = document.getElementById("autothink3").value;
+    const autothink4 = document.getElementById("autothink4").value;
+    const autothink5 = document.getElementById("autothink5").value;
+
+    if (title === "" || date === "" || where === "" || who === "" || content === "" || physical === "" || action === "" || feeling1 === "" || autothink1 === "") {
+      return alert("空白があります")
+    }
+    const feelings = [feeling1, feeling2, feeling3, feeling4, feeling5]
+    const autothinks = [autothink1, autothink2, autothink3, autothink4, autothink5]
+    let feeling_obj = {}
+    let autothink_obj = {}
+    feelings.forEach((feeling, i) => {
+      if (feeling !== "") {
+        feeling_obj[feeling] = per[i];
+      }
+    });
+    autothinks.forEach((autothink, i) => {
+      if (autothink !== "") {
+        autothink_obj[autothink] = per[i + 5]
+      }
+    })
+
+    const data = { title, date, where, who, content, physical, action, notion, feeling_obj, autothink_obj }
+    try {
+      const response = await fetch(`/update/${queryParams}`, {
+        method: "put",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message)
+        window.location.href = "/top"
+      } else {
+        alert(result.message || "エラーが発生しました")
+      }
+    } catch (error) {
+      console.error('エラーが発生しました:', error);
+      alert('通信エラーが発生しました。再試行してください。');
+
+    }
+  })
+  //削除
+  const delete_button = document.getElementById("delete_button");
+  delete_button.addEventListener("click", async (event) => {
+    const queryParams = encodeURIComponent(document.getElementById("memoid").value);
+    const userconfirm = confirm("本当に削除してもいいですか");
+    if (!userconfirm) {
+      event.preventDefault();
+
+    }
+    try {
+      const response = await fetch(`/delete/${queryParams}`, {
+        method: "delete",
+        headers: { "content-type": "application/json" }
+      })
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message)
+        window.location.href = '/top';
+      } else {
+        alert(result.message)
+      }
+    } catch (error) {
+      console.error('エラーが発生しました:', error);
+      alert('通信エラーが発生しました。再試行してください。');
+
+    }
+  })
+  //感情気分の一覧画面表示
+  const express = document.getElementById("feel_express"); 
+  express.addEventListener('click', () => {
+    window.open('/feel_express.html', "PopupWindow", "width=800,height=1000")
+  })
+</script>

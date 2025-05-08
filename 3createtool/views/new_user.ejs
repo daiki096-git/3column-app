@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>ログイン画面</title>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body>
+  <header>
+    <h1 class="login">3columnツール</h1>
+    <a href="/login" class="form">ログイン画面へ戻る</a>
+  </header>
+  <div class="form-group">
+    <div class="form-group-address">
+      <input type="text" id="address" placeholder="メールアドレスを入力してください" name="address" class="login_box">
+    </div>
+    <div class="form-group-pass">
+      <input type="password" id="password" placeholder="パスワードを入力してください" name="userpassword" class="login_box">
+    </div>
+    <button type="button" id="user_register" class="button_login_user">ユーザー登録</button>
+
+    <script>
+      //新規ユーザー登録
+      document.getElementById("user_register").addEventListener('click', async (event) => {
+        const address = document.getElementById("address").value;
+        const userpassword = document.getElementById("password").value;
+        const data = { address, userpassword }
+        try {
+          const response = await fetch('/send-email', {
+            method: "post",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(data)
+          })
+          const result = await response.json();
+          if (!response.ok) { 
+            alert(result.message||"送信に失敗しました")
+            return
+          } 
+          alert(result.message || "送信が完了しました");
+        } catch (error) {
+          console.error("connection failed", error)
+          alert("メールの送信に失敗しました")
+        }
+      })
+    </script>
+</body>
+
+</html>

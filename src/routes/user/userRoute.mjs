@@ -13,8 +13,7 @@ const router = express.Router();
 router.post('/send-email',
   body("address")
     .notEmpty().withMessage("メールアドレスは必須です")
-    .isEmail().withMessage("無効なメールアドレス形式です")
-    .normalizeEmail(),
+    .isEmail().withMessage("無効なメールアドレス形式です"),
   body("userpassword")
     .notEmpty().withMessage("パスワードは必須です")
     .isLength({ min: 8, max: 20 }).withMessage("パスワードは8文字以上20文字以下を入力してください")
@@ -40,8 +39,7 @@ router.get('/user_register/', verifyUserController)
 router.post('/send_newuser',
   body("address")
     .notEmpty().withMessage("メールアドレスは必須です")
-    .isEmail().withMessage("無効なメールアドレス形式です")
-    .normalizeEmail(),
+    .isEmail().withMessage("無効なメールアドレス形式です"),
   requestErrorHandler(verifyMailController))
 
 //パスワード再登録画面取得

@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 //新規ユーザー登録(メール飛ばす)
 export const newUserController = async (req, res) => {
-const jwt_secret = process.env.secret;
+const jwt_secret = process.env.SECRET;
   try{
   const { address, userpassword } = req.body;
   const isAvailable = await mailCheckDbModel(address);

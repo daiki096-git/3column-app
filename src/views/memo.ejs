@@ -227,7 +227,8 @@
   })
   //感情気分の一覧画面表示
   const express = document.getElementById("feel_express"); 
-  express.addEventListener('click', () => {
+  express.addEventListener('click', (event) => {
+    event.preventDefault();
     window.open('/feel_express.html', "PopupWindow", "width=800,height=1000")
   })
 </script>

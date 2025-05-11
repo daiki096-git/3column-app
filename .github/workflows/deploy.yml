@@ -1,0 +1,26 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # mainブランチへのpushでトリガー
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # 最新のコードを取得
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa  # Secretsに登録した秘密鍵を使う
+        chmod 600 ~/.ssh/id_rsa  # パーミッション設定
+        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts  # EC2のホストをknown_hostsに追加
+
+    - name: Deploy to EC2
+      run: |
+        ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_HOST }} "cd /home/ec2-user/3column-app && git pull origin main && npm install && pm2 restart app"
+

@@ -5,3 +5,7 @@
 *.logs
 
 node_modules/
+
+ssh-keygen -t rsa -b 4096 -C "github-to-ec2-deploy"
+
+ssh-keygen -t rsa -b 4096 -C "github-to-ec2-deploy".pub

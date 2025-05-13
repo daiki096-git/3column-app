@@ -4,8 +4,7 @@
   "main": "src/app.mjs",
   "scripts": {
     "start": "node src/app.mjs",
-    "test": "jest --passWithNoTests",
-    "build":"webpack --mode production"
+    "test": "jest --passWithNoTests"
   },
   "keywords": [],
   "author": "",

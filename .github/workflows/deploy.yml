@@ -1,4 +1,4 @@
-name: Test, Build, and Deploy to EC2
+name: Test, and Deploy to EC2
 
 on:
   push:
@@ -18,9 +18,6 @@ jobs:
 
     - name: Run tests
       run: npm test  # テストを実行
-
-    - name: Build project
-      run: npm run build  # 必要に応じてビルド
 
     - name: Setup SSH
       run: |

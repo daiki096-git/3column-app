@@ -1,4 +1,4 @@
-name: Deploy to EC2
+name: Test, Build, and Deploy to EC2
 
 on:
   push:
@@ -12,6 +12,15 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2  # 最新のコードを取得
+
+    - name: Install dependencies
+      run: npm install  # 依存関係をインストール（npm ciも可）
+
+    - name: Run tests
+      run: npm test  # テストを実行
+
+    - name: Build project
+      run: npm run build  # 必要に応じてビルド
 
     - name: Setup SSH
       run: |

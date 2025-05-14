@@ -426,7 +426,8 @@ header {
 }
 
 .new_user,
-.user_forget {
+.user_forget,
+.resend_email {
   font-size: 10px;
 }
 

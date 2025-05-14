@@ -6,6 +6,7 @@ import { getPasswordPageController } from "../../controllers/auth/resetPasswordC
 import { newPasswordController } from "../../controllers/auth/resetPasswordController.mjs";
 import { requestErrorHandler } from "../../middlewares/errorHandler.mjs";
 import { body } from "express-validator";
+import { reconfirmController } from "../../controllers/user/reconfirmController.mjs";
 
 const router = express.Router();
 
@@ -53,6 +54,18 @@ router.post('/user_again_register',
     .matches(/[a-z]/).withMessage("パスワードは少なくとも1つの小文字を含んでください")
     .matches(/\d/).withMessage("パスワードは少なくとも1つの数字を含んでください"),
   requestErrorHandler(newPasswordController))
+
+//メール再送画面取得
+router.get('/resend_email',(req,res)=>{
+  res.render('resend_email.ejs')
+})
+
+//メール再送処理
+router.post('/reconfirm_account',
+  body("address")
+    .notEmpty().withMessage("メールアドレスは必須です")
+    .isEmail().withMessage("無効なメールアドレス形式です"),
+  requestErrorHandler(reconfirmController))
 
 
 export default router

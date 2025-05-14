@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>ログイン画面</title>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body>
+  <header>
+    <h1 class="login">3columnツール</h1>
+    <a href="/login" class="form">ログイン画面へ戻る</a>
+  </header>
+  <div class="form-group">
+    <div class="form-group-address">
+      <input type="text" id="address" placeholder="メールアドレスを入力してください" name="address" class="login_box">
+    </div>
+    <div class="sendmail">
+      <button type="button" id=registerPassword class="button_login">再送</button>
+    </div>
+  </div>
+  <script>
+    //メール再送
+    document.getElementById("registerPassword").addEventListener('click', async (event) => {
+      const address = document.getElementById("address").value;
+      const data = { address };
+      try {
+        const response = await fetch('/reconfirm_account', {
+          method: "post",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(data)
+        })
+        const result = await response.json();
+        if (response.ok) {
+          alert(result.message)
+        } else {
+          alert(result.message||"メールの送信に失敗しました")
+        }
+      } catch (error) {
+        console.error("connection failed", error)
+        alert("メールの送信に失敗しました")
+      }
+    })  
+  </script>
+</body>
+
+</html>

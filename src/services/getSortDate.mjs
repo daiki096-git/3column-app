@@ -3,8 +3,7 @@ import { getColumnDbModel } from "../models/column/getColumnDbModel.mjs";
 //top画面遷移時の3コラ取得及びソート
 export const getSortDate=async(id,page)=> {
     try {
-      const results = await getColumnDbModel(id,page); 
-      console.log(results);     
+      const results = await getColumnDbModel(id,page);    
       let group = [];
       results.data.forEach((memo) => {
         let memo_date = new Date(memo.created_at)

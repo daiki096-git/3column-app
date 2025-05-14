@@ -12,6 +12,9 @@ export const loginVerifyController = async (req, res) => {
       if (results[0].length === 0) {
         return res.status(401).json({ message: "ユーザーが見つかりません" });
       }
+      if(results[0][0].status==="pending"){
+        return res.status(400).json({ message: "ユーザー認証が完了していません。メールから認証を完了させてください。" });
+      }
       const isEqual = await bcrypt.compare(password, results[0][0].password)
       if (!isEqual) {
         return res.status(401).json({ message: "認証に失敗しました" });

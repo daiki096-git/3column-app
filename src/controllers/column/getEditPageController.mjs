@@ -10,7 +10,7 @@ export const getEditPageController = async (req, res) => {
             logger.error("編集画面に移動できませんでした");
             throw new Error("編集画面取得中にエラーが発生しました");
         }
-        const dateInJST = moment(result.column.date).tz('Asia/Tokyo').format('YYYY-MM-DD');
+        const dateInJST = moment(result.column[0].date).tz('Asia/Tokyo').format('YYYY-MM-DD');
         const feels=result.feeling
         const autoThinks=result.autothink
         res.render('memo.ejs', { memo: result.column, feel: feels, autothink: autoThinks, date: dateInJST })

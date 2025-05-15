@@ -22,7 +22,7 @@ jobs:
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa  # Secretsに登録した秘密鍵を使う
+        printf "%s\n" "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa  # Secretsに登録した秘密鍵を使う
         chmod 600 ~/.ssh/id_rsa  # パーミッション設定
         ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts  # EC2のホストをknown_hostsに追加
 

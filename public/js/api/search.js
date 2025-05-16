@@ -1,0 +1,25 @@
+//タイトル検索
+export async function getTitle(search_result) {
+    const response = await fetch(`/search?search=${search_result}`, {
+        method: "get",
+        headers: { "content-type": "application/json" },
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message)
+    }
+    return result
+}
+
+//年月で検索
+export async function sortYearMonth(queryParams) {
+    const response = await fetch(`/searchDate?${queryParams}`, {
+        method: "get",
+        headers: { "content-type": "application/json" },
+    })
+    const result = await response.json();
+    if (!response.ok) {
+        throw new Error(result.message)
+    }
+    return result
+}

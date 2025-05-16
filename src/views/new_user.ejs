@@ -21,30 +21,7 @@
     </div>
     <button type="button" id="user_register" class="button_login_user">ユーザー登録</button>
 
-    <script>
-      //新規ユーザー登録
-      document.getElementById("user_register").addEventListener('click', async (event) => {
-        const address = document.getElementById("address").value;
-        const userpassword = document.getElementById("password").value;
-        const data = { address, userpassword }
-        try {
-          const response = await fetch('/send-email', {
-            method: "post",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(data)
-          })
-          const result = await response.json();
-          if (!response.ok) { 
-            alert(result.message||"送信に失敗しました")
-            return
-          } 
-          alert(result.message || "送信が完了しました");
-        } catch (error) {
-          console.error("connection failed", error)
-          alert("メールの送信に失敗しました")
-        }
-      })
-    </script>
+    <script type="module" src="/js/pages/new_user.js"></script>
 </body>
 
 </html>

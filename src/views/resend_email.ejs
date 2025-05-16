@@ -20,29 +20,7 @@
       <button type="button" id=registerPassword class="button_login">再送</button>
     </div>
   </div>
-  <script>
-    //メール再送
-    document.getElementById("registerPassword").addEventListener('click', async (event) => {
-      const address = document.getElementById("address").value;
-      const data = { address };
-      try {
-        const response = await fetch('/reconfirm_account', {
-          method: "post",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(data)
-        })
-        const result = await response.json();
-        if (response.ok) {
-          alert(result.message)
-        } else {
-          alert(result.message||"メールの送信に失敗しました")
-        }
-      } catch (error) {
-        console.error("connection failed", error)
-        alert("メールの送信に失敗しました")
-      }
-    })  
-  </script>
+  <script type="module" src="/js/pages/resend_email.js"></script>
 </body>
 
 </html>

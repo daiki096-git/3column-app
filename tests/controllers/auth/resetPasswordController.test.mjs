@@ -5,13 +5,6 @@ vi.mock('../../../config/mail.mjs', () => {
     }
   };
 });
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { verifyMailController, getPasswordPageController, newPasswordController } from '../../../src/controllers/auth/resetPasswordController.mjs';
-import { getAddressDbModel,updatePasswordDbModel} from '../../../src/models/user/UserDbModel.mjs';
-import { verifyjwtToken } from '../../../src/utils/jwt.mjs';
-import bcrypt from 'bcrypt';
-import transporter from '../../../config/mail.mjs';
-
 vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
     getAddressDbModel:vi.fn(),
     updatePasswordDbModel:vi.fn()
@@ -19,9 +12,15 @@ vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
 vi.mock('../../../src/utils/jwt.mjs',()=>({
     verifyjwtToken:vi.fn()
 }));
-
 vi.mock('../../../config/logger.mjs');
 vi.mock('bcrypt');
+
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { verifyMailController, getPasswordPageController, newPasswordController } from '../../../src/controllers/auth/resetPasswordController.mjs';
+import { getAddressDbModel,updatePasswordDbModel} from '../../../src/models/user/UserDbModel.mjs';
+import { verifyjwtToken } from '../../../src/utils/jwt.mjs';
+import bcrypt from 'bcrypt';
+import transporter from '../../../config/mail.mjs';
 
 describe('verifyMailController', () => {
   const mockReq = {

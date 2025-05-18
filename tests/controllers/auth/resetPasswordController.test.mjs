@@ -14,7 +14,11 @@ vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
 vi.mock('../../../src/utils/jwt.mjs',()=>({
     verifyjwtToken:vi.fn()
 }));
-vi.mock('../../../config/mail.mjs');
+vi.mock('../../../config/mail.mjs',()=>({
+    default: {
+    sendMail: vi.fn()
+  }
+}));
 vi.mock('../../../config/logger.mjs');
 vi.mock('bcrypt');
 

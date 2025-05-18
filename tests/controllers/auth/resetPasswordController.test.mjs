@@ -1,16 +1,15 @@
-// test/controllers/userController.test.js
+vi.mock('../../../config/mail.mjs', () => {
+  return {
+    default: {
+      sendMail: vi.fn((options, callback) => callback(null, 'success'))
+    }
+  };
+});
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { verifyMailController, getPasswordPageController, newPasswordController } from '../../../src/controllers/auth/resetPasswordController.mjs';
 import { getAddressDbModel,updatePasswordDbModel} from '../../../src/models/user/UserDbModel.mjs';
 import { verifyjwtToken } from '../../../src/utils/jwt.mjs';
 import bcrypt from 'bcrypt';
-
-beforeAll(() => {
-  process.env.MAIL_HOST = 'smtp.example.com';
-  process.env.MAIL_PORT = '465';
-  process.env.MAIL_USER = 'test@example.com';
-  process.env.MAIL_USER_PASSWORD = 'password';
-});
 import transporter from '../../../config/mail.mjs';
 
 vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
@@ -20,13 +19,7 @@ vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
 vi.mock('../../../src/utils/jwt.mjs',()=>({
     verifyjwtToken:vi.fn()
 }));
-vi.mock('../../../config/mail.mjs', () => {
-  return {
-    default: {
-      sendMail: vi.fn((options, callback) => callback(null, 'success'))
-    }
-  };
-});
+
 vi.mock('../../../config/logger.mjs');
 vi.mock('bcrypt');
 

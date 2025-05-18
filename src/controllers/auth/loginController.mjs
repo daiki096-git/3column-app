@@ -21,10 +21,7 @@ export const loginVerifyController = async (req, res) => {
       }
       const id = results[0][0].userid;
       req.session.userid = results[0][0].userid;
-      let page=1
-      if(req.query.page!==undefined||req.query.page!==undefined){
-        page=req.query.page
-      }
+      const page=1
       const result = await getSortDate(id,page);
       req.session.userData = {
         date: result.date,

@@ -4,8 +4,14 @@ import { verifyMailController, getPasswordPageController, newPasswordController 
 import { getAddressDbModel,updatePasswordDbModel} from '../../../src/models/user/UserDbModel.mjs';
 import { verifyjwtToken } from '../../../src/utils/jwt.mjs';
 import bcrypt from 'bcrypt';
-import transporter from '../../../config/mail.mjs';
 
+beforeAll(() => {
+  process.env.MAIL_HOST = 'smtp.example.com';
+  process.env.MAIL_PORT = '465';
+  process.env.MAIL_USER = 'test@example.com';
+  process.env.MAIL_USER_PASSWORD = 'password';
+});
+import transporter from '../../../config/mail.mjs';
 
 vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
     getAddressDbModel:vi.fn(),

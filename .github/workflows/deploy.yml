@@ -17,6 +17,11 @@ jobs:
       run: npm install  # 依存関係をインストール（npm ciも可）
 
     - name: Run tests
+      env:
+        MAIL_USER: ${{ secrets.MAIL_USER }}
+        MAIL_USER_PASSWORD: ${{ secrets.MAIL_USER_PASSWORD }}
+        MAIL_PORT: ${{ secrets.MAIL_PORT }}
+        MAIL_HOST: ${{ secrets.MAIL_HOST }}
       run: npm test  # テストを実行
 
     - name: Setup SSH

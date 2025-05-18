@@ -44,7 +44,6 @@ describe('verifyMailController', () => {
 
   it('メールが存在する場合、メール送信して200を返す', async () => {
     getAddressDbModel.mockResolvedValue([[{ id: 1 }]]);
-
     await verifyMailController(mockReq, mockRes);
     expect(transporter.sendMail).toHaveBeenCalled();
     expect(mockRes.status).toHaveBeenCalledWith(200);

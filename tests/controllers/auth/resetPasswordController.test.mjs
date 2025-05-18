@@ -1,8 +1,8 @@
 // test/controllers/userController.test.js
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { verifyMailController, getPasswordPageController, newPasswordController } from '../../../src/controllers/auth/resetPasswordController.mjs';
 import { getAddressDbModel,updatePasswordDbModel} from '../../../src/models/user/UserDbModel.mjs';
-import {verifyjwtToken} from '../../../src/utils/jwt.mjs';
+import { verifyjwtToken } from '../../../src/utils/jwt.mjs';
 import bcrypt from 'bcrypt';
 import transporter from '../../../config/mail.mjs';
 
@@ -14,11 +14,13 @@ vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
 vi.mock('../../../src/utils/jwt.mjs',()=>({
     verifyjwtToken:vi.fn()
 }));
-vi.mock('../../../config/mail.mjs',()=>({
+vi.mock('../../../config/mail.mjs', () => {
+  return {
     default: {
-    sendMail: vi.fn()
-  }
-}));
+      sendMail: vi.fn((options, callback) => callback(null, 'success'))
+    }
+  };
+});
 vi.mock('../../../config/logger.mjs');
 vi.mock('bcrypt');
 
@@ -44,7 +46,6 @@ describe('verifyMailController', () => {
 
   it('メールが存在する場合、メール送信して200を返す', async () => {
     getAddressDbModel.mockResolvedValue([[{ id: 1 }]]);
-    transporter.sendMail.mockImplementation((options, callback) => callback(null, 'success'));
 
     await verifyMailController(mockReq, mockRes);
     expect(transporter.sendMail).toHaveBeenCalled();

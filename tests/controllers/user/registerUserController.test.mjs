@@ -70,11 +70,7 @@ describe("newUserController", () => {
     bcrypt.hash.mockResolvedValue("hashedpassword");
     newUserDbModel.mockResolvedValue([{ insertId: "1" }]);
     jwt.sign.mockReturnValue("signedtoken");
-
-    // transporter.sendMailのコールバックを即座に呼び成功させる
-    transporter.sendMail.mockImplementation((mailOptions, callback) => {
-      callback(null, { response: "OK" });
-    });
+    transporter.sendMail.mockResolvedValue(true)
 
     await newUserController(mockReq, mockRes);
 
@@ -94,11 +90,7 @@ describe("newUserController", () => {
     bcrypt.hash.mockResolvedValue("hashedpassword");
     newUserDbModel.mockResolvedValue([{ insertId: "1" }]);
     jwt.sign.mockReturnValue("signedtoken");
-
-    transporter.sendMail.mockImplementation((mailOptions, callback) => {
-      callback(new Error("sendMail failed"));
-    });
-
+    transporter.sendMail.mockResolvedValue(false)
     await newUserController(mockReq, mockRes);
 
     expect(mockRes.status).toHaveBeenCalledWith(500);
@@ -115,6 +107,6 @@ describe("newUserController", () => {
       expect.any(Error)
     );
     expect(mockRes.status).toHaveBeenCalledWith(500);
-    expect(mockRes.json).toHaveBeenCalledWith({ message: "サーバーエラーが発生しました" });
+    expect(mockRes.json).toHaveBeenCalledWith({ message: "メール送信に失敗しました" });
   });
 });

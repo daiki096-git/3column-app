@@ -1,30 +1,37 @@
 vi.mock('../../../config/mail.mjs', () => ({
-    default: {
-      sendMail: vi.fn()
-    }
-}));
-vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
-    getAddressDbModel:vi.fn(),
-    updatePasswordDbModel:vi.fn()
-}));
-vi.mock('../../../src/utils/jwt.mjs',()=>({
-    verifyjwtToken:vi.fn()
-}));
-vi.mock('../../../config/logger.mjs',()=>({
-  default:{
-    error:vi.fn(),
-    info:vi.fn()
+  default: {
+    sendMail: vi.fn()
   }
 }));
-vi.mock('bcrypt');
+vi.mock('../../../src/models/user/UserDbModel.mjs', () => ({
+  getAddressDbModel: vi.fn(),
+  updatePasswordDbModel: vi.fn()
+}));
+vi.mock('../../../src/utils/jwt.mjs', () => ({
+  verifyjwtToken: vi.fn()
+}));
+vi.mock('../../../config/logger.mjs', () => ({
+  default: {
+    error: vi.fn(),
+    info: vi.fn()
+  }
+}));
+vi.mock("bcrypt", () => ({
+  default: { hash: vi.fn() }
+}));
+vi.mock("jsonwebtoken", () => ({
+  _esModule:true,
+  default: { sign:vi.fn(() => "signedtoken" )}
+}));
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { verifyMailController, getPasswordPageController, newPasswordController } from '../../../src/controllers/auth/resetPasswordController.mjs';
-import { getAddressDbModel,updatePasswordDbModel} from '../../../src/models/user/UserDbModel.mjs';
+import { getAddressDbModel, updatePasswordDbModel } from '../../../src/models/user/UserDbModel.mjs';
 import { verifyjwtToken } from '../../../src/utils/jwt.mjs';
 import bcrypt from 'bcrypt';
 import transporter from '../../../config/mail.mjs';
 import logger from '../../../config/logger.mjs';
+import jwt from "jsonwebtoken"
 
 describe('verifyMailController', () => {
   const OLD_ENV = process.env;
@@ -41,6 +48,9 @@ describe('verifyMailController', () => {
     process.env = { ...OLD_ENV, SECRET: "testsecret", MAIL_URL: "http://localhost", MAIL_USER: "test@example.com" };
   });
 
+  afterAll(() => {
+    process.env = OLD_ENV;  // テスト後に元に戻す
+  });
   it('メールが存在しない場合、400エラーを返す', async () => {
     getAddressDbModel.mockResolvedValue([[]]);
     await verifyMailController(mockReq, mockRes);
@@ -49,9 +59,17 @@ describe('verifyMailController', () => {
   });
 
   it('メールが存在する場合、メール送信して200を返す', async () => {
-    getAddressDbModel.mockResolvedValue([[{ userid: "1" }]]);
+    getAddressDbModel.mockResolvedValue([[{
+      userid: 1,
+      mailaddress: "test@example.com",
+      password: "$2b$10$XnIfaWAnPwz.avMi2/6YfO4gC7YAZULNW0GvX5nYTrv0/B0xzS4r2",
+      status: "pending",
+      created_at: "2025-05-19T06:56:58.000Z",
+    }]]);
+    jwt.sign.mockReturnValue("signedtoken");
     transporter.sendMail.mockResolvedValue(true)
     await verifyMailController(mockReq, mockRes);
+    expect(transporter.sendMail).toHaveBeenCalled();
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith({ message: "アカウント再登録フォームをメールアドレスに送信しました" });
   });

@@ -1,10 +1,8 @@
-vi.mock('../../../config/mail.mjs', () => {
-  return {
+vi.mock('../../../config/mail.mjs', () => ({
     default: {
-      sendMail: vi.fn((options, callback) => callback(null, 'success'))
+      sendMail: vi.fn()
     }
-  };
-});
+}));
 vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
     getAddressDbModel:vi.fn(),
     updatePasswordDbModel:vi.fn()
@@ -52,7 +50,7 @@ describe('verifyMailController', () => {
   });
 
   it('メールが存在する場合、メール送信して200を返す', async () => {
-    getAddressDbModel.mockResolvedValue([[{ id: 1 }]]);
+    getAddressDbModel.mockResolvedValue([[{ userid: "1" }]]);
     transporter.sendMail.mockImplementation((_options, callback) => {
       callback(null, { success: true });
     });

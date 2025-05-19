@@ -1,3 +1,14 @@
+vi.mock('bcrypt')
+vi.mock('../../../config/logger.mjs',()=>({
+default:{
+  error:vi.fn(),
+  info:vi.fn()
+}
+}))
+vi.mock('../../../src/models/user/UserDbModel.mjs')
+vi.mock('../../../src/services/getSortDate.mjs')
+
+
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import bcrypt from 'bcrypt'
 import logger from '../../../config/logger.mjs'
@@ -5,10 +16,7 @@ import { getAddressDbModel } from '../../../src/models/user/UserDbModel.mjs'
 import { getSortDate } from '../../../src/services/getSortDate.mjs'
 import { loginVerifyController } from '../../../src/controllers/auth/loginController.mjs'
 
-vi.mock('bcrypt')
-vi.mock('../../../config/logger.mjs')
-vi.mock('../../../src/models/user/UserDbModel.mjs')
-vi.mock('../../../src/services/getSortDate.mjs')
+
 
 describe('loginVerifyController', () => {
   let req, res
@@ -118,7 +126,7 @@ describe('loginVerifyController', () => {
 
     await loginVerifyController(req, res)
 
-    expect(logger.error).toHaveBeenCalled()
+    expect(logger.error).toHaveBeenCalledWith("[controller]認証に失敗しました:",expect.any(Error))
     expect(res.status).toHaveBeenCalledWith(500)
     expect(res.json).toHaveBeenCalledWith({
       message: 'ログインに失敗しました',

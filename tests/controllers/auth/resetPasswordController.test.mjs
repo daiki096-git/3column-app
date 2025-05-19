@@ -12,7 +12,12 @@ vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
 vi.mock('../../../src/utils/jwt.mjs',()=>({
     verifyjwtToken:vi.fn()
 }));
-vi.mock('../../../config/logger.mjs');
+vi.mock('../../../config/logger.mjs',()=>({
+  default:{
+    error:vi.fn(),
+    info:vi.fn()
+  }
+}));
 vi.mock('bcrypt');
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -21,6 +26,7 @@ import { getAddressDbModel,updatePasswordDbModel} from '../../../src/models/user
 import { verifyjwtToken } from '../../../src/utils/jwt.mjs';
 import bcrypt from 'bcrypt';
 import transporter from '../../../config/mail.mjs';
+import logger from '../../../config/logger.mjs';
 
 describe('verifyMailController', () => {
   const mockReq = {
@@ -53,6 +59,7 @@ describe('verifyMailController', () => {
   it('サーバーエラー時、500を返す', async () => {
     getAddressDbModel.mockRejectedValue(new Error('DB error'));
     await verifyMailController(mockReq, mockRes);
+    expect(logger.error).toHaveBeenCalledWith("Error during fetch mailaddress:", expect.any(Error));
     expect(mockRes.status).toHaveBeenCalledWith(500);
     expect(mockRes.json).toHaveBeenCalledWith({ message: "サーバーエラーが発生しました" });
   });
@@ -112,6 +119,7 @@ describe('newPasswordController', () => {
     updatePasswordDbModel.mockRejectedValue(new Error('Update failed'));
 
     await newPasswordController(mockReq, mockRes);
+    expect(logger.error).toHaveBeenCalledWith("[controller]Error during database update:", expect.any(Error));
     expect(mockRes.status).toHaveBeenCalledWith(500);
     expect(mockRes.json).toHaveBeenCalledWith({ message: "アカウント更新に失敗しました" });
   });

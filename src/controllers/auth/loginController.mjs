@@ -31,7 +31,7 @@ export const loginVerifyController = async (req, res) => {
       }
       res.status(200).json({ message: "ログイン成功" })
     } catch (error) {
-      logger.error(`[controller]認証に失敗しました: ${error.message}`);
+      logger.error("[controller]認証に失敗しました:",error);
       res.status(500).json({ message: "ログインに失敗しました", error: error.message });
     }
   }

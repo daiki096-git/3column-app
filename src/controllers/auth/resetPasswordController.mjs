@@ -24,7 +24,7 @@ export const verifyMailController = async (req, res) => {
         html: `<p>以下のリンクをクリックしてユーザー名とパスワードを再設定してください:</p>
                        <a href="${verificationlink}">アカウント再設定</a>`,
       })
-    if (!mailResult || mailResult.success === false) {
+    if (!mailResult) {
       return res.status(500).json({ message: "メール送信に失敗しました" });
     }
     return res.status(200).json({ message: "アカウント再登録フォームをメールアドレスに送信しました" })

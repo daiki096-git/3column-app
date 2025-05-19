@@ -51,7 +51,7 @@ describe('verifyMailController', () => {
 
   it('メールが存在する場合、メール送信して200を返す', async () => {
     getAddressDbModel.mockResolvedValue([[{ userid: "1" }]]);
-    transporter.sendMail.mockResolvedValue({success:true})
+    await transporter.sendMail.mockResolvedValue(true)
     await verifyMailController(mockReq, mockRes);
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith({ message: "アカウント再登録フォームをメールアドレスに送信しました" });

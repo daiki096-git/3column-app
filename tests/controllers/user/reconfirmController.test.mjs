@@ -64,7 +64,7 @@ describe("reconfirmController", () => {
     const overAnHourAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
     const fakeUserid = "1";
     mailCheckDbModel.mockResolvedValue([{ status: "pending", created_at: overAnHourAgo, userid: fakeUserid }]);
-    transporter.sendMail.mockResolvedValue({success:true})
+    await transporter.sendMail.mockResolvedValue(true)
     await reconfirmController(mockReq, mockRes);
     expect(updateTimeDbModel).toHaveBeenCalledWith(fakeUserid, expect.any(Date));
     expect(mockRes.status).toHaveBeenCalledWith(200);

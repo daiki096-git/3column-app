@@ -35,7 +35,7 @@ export const reconfirmController = async (req, res) => {
                <a href="${verificationlink}">アカウント認証</a>`,
             }
         )
-        if (!mailResult || mailResult.success === false) {
+        if (!mailResult) {
             return res.status(500).json({ message: "メール送信に失敗しました" });
         }
         await updateTimeDbModel(userResult[0].userid, now);

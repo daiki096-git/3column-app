@@ -51,12 +51,17 @@ describe('verifyMailController', () => {
 
   it('メールが存在する場合、メール送信して200を返す', async () => {
     getAddressDbModel.mockResolvedValue([[{ userid: "1" }]]);
-    transporter.sendMail.mockImplementation((_options, callback) => {
-      callback(null, { success: true });
-    });
+    transporter.sendMail.mockResolvedValue({success:true})
     await verifyMailController(mockReq, mockRes);
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith({ message: "アカウント再登録フォームをメールアドレスに送信しました" });
+  });
+  it('メール送信失敗したら500を返す', async () => {
+    getAddressDbModel.mockResolvedValue([[{ userid: "1" }]]);
+    transporter.sendMail.mockRejectedValue(new Error('mail failed'))
+    await verifyMailController(mockReq, mockRes);
+    expect(mockRes.status).toHaveBeenCalledWith(500);
+    expect(mockRes.json).toHaveBeenCalledWith({ message: "メール送信に失敗しました" });
   });
 
   it('サーバーエラー時、500を返す', async () => {

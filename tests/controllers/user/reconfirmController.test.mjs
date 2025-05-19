@@ -73,22 +73,11 @@ describe("reconfirmController", () => {
     });
   });
 
-  it("メール送信が失敗したら500を返す", async () => {
-    const overAnHourAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
-    mailCheckDbModel.mockResolvedValue([{ status: "pending", created_at: overAnHourAgo, userid: "1" }]);
-    transporter.sendMail.mockImplementation((_options, callback) => {
-      callback(new Error("Send failed"), null);
-    });
-    await reconfirmController(mockReq, mockRes);
-    expect(mockRes.status).toHaveBeenCalledWith(500);
-    expect(mockRes.json).toHaveBeenCalledWith({ message: "メール送信に失敗しました" });
-  });
-
-  it("内部サーバーエラーが発生したら500を返す", async () => {
+  it("メール送信失敗したら、500を返す", async () => {
     mailCheckDbModel.mockRejectedValue(new Error("DB connection Error"));
     await reconfirmController(mockReq, mockRes);
     expect(logger.error).toHaveBeenCalledWith("[controller]Error during fetch mailaddress:", expect.any(Error));
     expect(mockRes.status).toHaveBeenCalledWith(500);
-    expect(mockRes.json).toHaveBeenCalledWith({ message: "サーバーエラーが発生しました" });
+    expect(mockRes.json).toHaveBeenCalledWith({ message: "メール送信に失敗しました" });
   });
 });

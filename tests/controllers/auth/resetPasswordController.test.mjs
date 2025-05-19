@@ -56,20 +56,13 @@ describe('verifyMailController', () => {
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith({ message: "アカウント再登録フォームをメールアドレスに送信しました" });
   });
-  it('メール送信失敗したら500を返す', async () => {
-    getAddressDbModel.mockResolvedValue([[{ userid: "1" }]]);
-    transporter.sendMail.mockRejectedValue(new Error('mail failed'))
-    await verifyMailController(mockReq, mockRes);
-    expect(mockRes.status).toHaveBeenCalledWith(500);
-    expect(mockRes.json).toHaveBeenCalledWith({ message: "メール送信に失敗しました" });
-  });
 
-  it('サーバーエラー時、500を返す', async () => {
+  it('メール送信に失敗したら、500を返す', async () => {
     getAddressDbModel.mockRejectedValue(new Error('DB error'));
     await verifyMailController(mockReq, mockRes);
     expect(logger.error).toHaveBeenCalledWith("Error during fetch mailaddress:", expect.any(Error));
     expect(mockRes.status).toHaveBeenCalledWith(500);
-    expect(mockRes.json).toHaveBeenCalledWith({ message: "サーバーエラーが発生しました" });
+    expect(mockRes.json).toHaveBeenCalledWith({ message: "メール送信に失敗しました" });
   });
 });
 

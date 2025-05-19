@@ -49,22 +49,34 @@ describe('verifyMailController', () => {
   });
 
   afterAll(() => {
-    process.env = OLD_ENV;  // テスト後に元に戻す
+    process.env = OLD_ENV;
   });
-  it('メールが存在しない場合、400エラーを返す', async () => {
+  it('メールが存在しない場合、400を返す', async () => {
     getAddressDbModel.mockResolvedValue([[]]);
     await verifyMailController(mockReq, mockRes);
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ message: "入力されたメールアドレスは登録されていません" });
   });
+  it('認証がまだ完了していない場合、400を返す',async()=>{
+    getAddressDbModel.mockResolvedValue([[{
+      userid: 1,
+      mailaddress: "test@example.com",
+      password: "test",
+      status: "pending",
+      created_at: "2025-05-19",
+    }]]);
+    await verifyMailController(mockReq, mockRes);
+    expect(mockRes.status).toHaveBeenCalledWith(400);
+    expect(mockRes.json).toHaveBeenCalledWith({ message: "このアカウントは認証されていません。メールから認証してください"});
+  })
 
   it('メールが存在する場合、メール送信して200を返す', async () => {
     getAddressDbModel.mockResolvedValue([[{
       userid: 1,
       mailaddress: "test@example.com",
-      password: "$2b$10$XnIfaWAnPwz.avMi2/6YfO4gC7YAZULNW0GvX5nYTrv0/B0xzS4r2",
-      status: "pending",
-      created_at: "2025-05-19T06:56:58.000Z",
+      password: "test",
+      status: "active",
+      created_at: "2025-05-19",
     }]]);
     jwt.sign.mockReturnValue("signedtoken");
     transporter.sendMail.mockResolvedValue(true)

@@ -14,6 +14,7 @@ export const verifyMailController = async (req, res) => {
     const mailaddress = req.body.address;
     const result = await getAddressDbModel(mailaddress)
     if (result[0].length === 0) return res.status(400).json({ message: "入力されたメールアドレスは登録されていません" })
+    if (result[0][0].status==="pending")return res.status(400).json({message:"このアカウントは認証されていません。メールから認証してください"})
     const token = jwt.sign({ mailaddress }, jwt_secret, { expiresIn: "1h" })
     const verificationlink = `${process.env.MAIL_URL}/modify_user?token=${token}`;
     const mailResult=await transporter.sendMail(

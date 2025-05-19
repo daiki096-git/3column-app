@@ -38,10 +38,10 @@ describe('verifyMailController', () => {
   };
 
   beforeEach(() => {
-     process.env.SECRET = "testsecret";
+    vi.clearAllMocks();
+    process.env.SECRET = "testsecret";
     process.env.MAIL_URL = "http://localhost:3000";
     process.env.MAIL_USER = "test@example.com";
-    vi.clearAllMocks();
   });
 
   it('メールが存在しない場合、400エラーを返す', async () => {
@@ -53,10 +53,12 @@ describe('verifyMailController', () => {
 
   it('メールが存在する場合、メール送信して200を返す', async () => {
     getAddressDbModel.mockResolvedValue([[{ id: 1 }]]);
+    transporter.sendMail.mockImplementation((_options, callback) => {
+      callback(null, { success: true });
+    });
     await verifyMailController(mockReq, mockRes);
-    /* expect(transporter.sendMail).toHaveBeenCalled();
     expect(mockRes.status).toHaveBeenCalledWith(200);
-    expect(mockRes.json).toHaveBeenCalledWith({ message: "アカウント再登録フォームをメールアドレスに送信しました" }); */
+    expect(mockRes.json).toHaveBeenCalledWith({ message: "アカウント再登録フォームをメールアドレスに送信しました" });
   });
 
   it('サーバーエラー時、500を返す', async () => {

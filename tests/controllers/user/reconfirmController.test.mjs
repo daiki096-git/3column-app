@@ -35,7 +35,7 @@ describe("reconfirmController", () => {
   };
   beforeEach(() => {
     vi.clearAllMocks();
-    process.env = { ...OLD_ENV, SECRET: "testsecret", MAIL_URL: "http://localhost", MAIL_USER: "noreply@example.com" };
+    process.env = { ...OLD_ENV, SECRET: "testsecret", MAIL_URL: "http://localhost", MAIL_USER: "test@example.com" };
   });
 
   it("メールアドレスが未登録なら404を返す", async () => {
@@ -64,7 +64,7 @@ describe("reconfirmController", () => {
     const overAnHourAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
     const fakeUserid = "1";
     mailCheckDbModel.mockResolvedValue([{ status: "pending", created_at: overAnHourAgo, userid: fakeUserid }]);
-    await transporter.sendMail.mockResolvedValue(true)
+    transporter.sendMail.mockResolvedValue(true)
     await reconfirmController(mockReq, mockRes);
     expect(updateTimeDbModel).toHaveBeenCalledWith(fakeUserid, expect.any(Date));
     expect(mockRes.status).toHaveBeenCalledWith(200);

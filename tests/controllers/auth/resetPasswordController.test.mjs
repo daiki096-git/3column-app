@@ -27,6 +27,7 @@ import transporter from '../../../config/mail.mjs';
 import logger from '../../../config/logger.mjs';
 
 describe('verifyMailController', () => {
+  const OLD_ENV = process.env;
   const mockReq = {
     body: { address: 'test@example.com' }
   };
@@ -37,9 +38,7 @@ describe('verifyMailController', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    process.env.SECRET = "testsecret";
-    process.env.MAIL_URL = "http://localhost:3000";
-    process.env.MAIL_USER = "test@example.com";
+    process.env = { ...OLD_ENV, SECRET: "testsecret", MAIL_URL: "http://localhost", MAIL_USER: "test@example.com" };
   });
 
   it('メールが存在しない場合、400エラーを返す', async () => {
@@ -51,7 +50,7 @@ describe('verifyMailController', () => {
 
   it('メールが存在する場合、メール送信して200を返す', async () => {
     getAddressDbModel.mockResolvedValue([[{ userid: "1" }]]);
-    await transporter.sendMail.mockResolvedValue(true)
+    transporter.sendMail.mockResolvedValue(true)
     await verifyMailController(mockReq, mockRes);
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith({ message: "アカウント再登録フォームをメールアドレスに送信しました" });

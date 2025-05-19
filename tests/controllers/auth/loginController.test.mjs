@@ -5,9 +5,12 @@ default:{
   info:vi.fn()
 }
 }))
-vi.mock('../../../src/models/user/UserDbModel.mjs')
-vi.mock('../../../src/services/getSortDate.mjs')
-
+vi.mock('../../../src/models/user/UserDbModel.mjs',()=>({
+  getAddressDbModel:vi.fn()
+}))
+vi.mock('../../../src/services/getSortDate.mjs',()=>({
+  getSortDate:vi.fn()
+}))
 
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import bcrypt from 'bcrypt'

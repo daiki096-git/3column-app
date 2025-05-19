@@ -72,7 +72,7 @@ describe('updateController', () => {
   });
 
   it('例外発生時、500を返す', async () => {
-    updateDbModel.mockRejectedValue(new Error('DB error'));
+    updateDbModel.mockRejectedValue(new Error('DB connection error'));
 
     await updateController(mockReq, mockRes);
 

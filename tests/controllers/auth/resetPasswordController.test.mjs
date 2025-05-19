@@ -38,6 +38,9 @@ describe('verifyMailController', () => {
   };
 
   beforeEach(() => {
+     process.env.SECRET = "testsecret";
+    process.env.MAIL_URL = "http://localhost:3000";
+    process.env.MAIL_USER = "test@example.com";
     vi.clearAllMocks();
   });
 

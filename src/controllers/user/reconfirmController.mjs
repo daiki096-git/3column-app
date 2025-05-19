@@ -26,7 +26,7 @@ export const reconfirmController = async (req, res) => {
         }
         const token = jwt.sign({ userid: userResult[0].userid }, jwt_secret, { expiresIn: "1h" })
         const verificationlink = `${process.env.MAIL_URL}/user_register?token=${token}`;
-        await transporter.sendMail(
+        const mailResult = await transporter.sendMail(
             {
                 from: process.env.MAIL_USER,
                 to: address,
@@ -35,7 +35,9 @@ export const reconfirmController = async (req, res) => {
                <a href="${verificationlink}">アカウント認証</a>`,
             }
         )
-
+        if (!mailResult || mailResult.success === false) {
+            return res.status(500).json({ message: "メール送信に失敗しました" });
+        }
         await updateTimeDbModel(userResult[0].userid, now);
         return res.status(200).json({ message: "確認メールを送信しました。メールから登録を完了させてください。" })
     } catch (error) {

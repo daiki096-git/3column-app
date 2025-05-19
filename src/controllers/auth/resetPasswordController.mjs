@@ -16,7 +16,7 @@ export const verifyMailController = async (req, res) => {
     if (result[0].length === 0) return res.status(400).json({ message: "入力されたメールアドレスは登録されていません" })
     const token = jwt.sign({ mailaddress }, jwt_secret, { expiresIn: "1h" })
     const verificationlink = `${process.env.MAIL_URL}/modify_user?token=${token}`;
-    await transporter.sendMail(
+    const mailResult=await transporter.sendMail(
       {
         from: process.env.MAIL_USER,
         to: mailaddress,
@@ -24,6 +24,9 @@ export const verifyMailController = async (req, res) => {
         html: `<p>以下のリンクをクリックしてユーザー名とパスワードを再設定してください:</p>
                        <a href="${verificationlink}">アカウント再設定</a>`,
       })
+    if (!mailResult || mailResult.success === false) {
+      return res.status(500).json({ message: "メール送信に失敗しました" });
+    }
     return res.status(200).json({ message: "アカウント再登録フォームをメールアドレスに送信しました" })
   } catch (error) {
     logger.error("Error during fetch mailaddress:", error);

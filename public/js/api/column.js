@@ -1,6 +1,6 @@
 //3コラ登録
 export async function registerColumn(data) {
-    const response = await fetch('/register', {
+    const response = await fetch('/api/columns', {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data)
@@ -15,7 +15,7 @@ export async function registerColumn(data) {
 
 //3コラ更新
 export async function updateColumn(data, queryParams) {
-    const response = await fetch(`/update/${queryParams}`, {
+    const response = await fetch(`/api/columns/${queryParams}`, {
         method: "put",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data)
@@ -29,7 +29,7 @@ export async function updateColumn(data, queryParams) {
 
 //3コラ削除
 export async function deleteColumn(queryParams) {
-    const response = await fetch(`/delete/${queryParams}`, {
+    const response = await fetch(`/api/columns/${queryParams}`, {
         method: "delete",
         headers: { "content-type": "application/json" }
     })

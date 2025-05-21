@@ -13,12 +13,12 @@ router.get('/', (req, res) => {
     res.render('login.ejs')
     logger.info(`GET / requested from ${req.ip}`);
 })
-router.post('/top',
+//ログイン処理
+router.post('/api/login',
     body("mail").notEmpty().withMessage("メールアドレスは必須です"),
     body("password").notEmpty().withMessage("パスワードは必須です"),
     requestErrorHandler(loginVerifyController),
 )
-
 //ログアウト
 router.get('/login', (req, res) => {
     req.session.destroy((error) => {

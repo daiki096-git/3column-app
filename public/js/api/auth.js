@@ -1,7 +1,7 @@
 //ログイン処理
-export async function login(mail, password) {
+export async function verifyLogin(mail, password) {
     const data = { mail, password }
-    const response = await fetch('/top', {
+    const response = await fetch('/api/login', {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data)

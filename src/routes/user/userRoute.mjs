@@ -11,7 +11,7 @@ import { reconfirmController } from "../../controllers/user/reconfirmController.
 const router = express.Router();
 
 //新規ユーザー登録
-router.post('/send-email',
+router.post('/api/users',
   body("address")
     .notEmpty().withMessage("メールアドレスは必須です")
     .isEmail().withMessage("無効なメールアドレス形式です"),
@@ -37,7 +37,7 @@ router.get('/user_forget', (req, res) => {
 router.get('/user_register/', verifyUserController)
 
 //パスワード再登録のためのアカウント(メールアドレス)確認処理
-router.post('/send_newuser',
+router.post('/api/users/password-forget',
   body("address")
     .notEmpty().withMessage("メールアドレスは必須です")
     .isEmail().withMessage("無効なメールアドレス形式です"),
@@ -47,7 +47,7 @@ router.post('/send_newuser',
 router.get('/modify_user', getPasswordPageController)
 
 //パスワード再登録
-router.post('/user_again_register',
+router.post('/api/users/password-reset',
   body("password").notEmpty().withMessage("パスワードは必須です")
     .isLength({ min: 8, max: 20 }).withMessage("パスワードは8文字以上20文字以下を入力してください")
     .matches(/[A-Z]/).withMessage("パスワードは少なくとも1つの大文字を含んでください")
@@ -61,7 +61,7 @@ router.get('/resend_email',(req,res)=>{
 })
 
 //メール再送処理
-router.post('/reconfirm_account',
+router.post('/api/users/resend-confirmation',
   body("address")
     .notEmpty().withMessage("メールアドレスは必須です")
     .isEmail().withMessage("無効なメールアドレス形式です"),

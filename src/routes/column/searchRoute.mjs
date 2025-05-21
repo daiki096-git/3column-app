@@ -9,12 +9,12 @@ import { getYearDateController } from "../../controllers/column/getYearDateContr
 const router = express.Router();
 router.use(session_middle);
 //タイトルで検索
-router.get('/search', authenticate,
+router.get('/api/columns/title', authenticate,
   query('search').notEmpty().withMessage('検索ワードは必須です'),
   requestErrorHandler(searchController))
 
 //年月で検索
-router.get('/searchDate',authenticate,getYearDateController)
+router.get('/api/columns/date',authenticate,getYearDateController)
 
 //検索結果を返す
 router.get('/search_result', (req, res) => {

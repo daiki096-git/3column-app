@@ -1,6 +1,6 @@
 //新規ユーザー登録
 export async function newUserRegister(data) {
-    const response = await fetch('/send-email', {
+    const response = await fetch('/api/users', {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data)
@@ -14,7 +14,7 @@ export async function newUserRegister(data) {
 
 //アカウント再設定
 export async function resetPassword(data) {
-    const response = await fetch("/user_again_register", {
+    const response = await fetch("/api/users/password-reset", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data)
@@ -28,7 +28,7 @@ export async function resetPassword(data) {
 
 //メール再送
 export async function resendEmail(data) {
-    const response = await fetch('/reconfirm_account', {
+    const response = await fetch('/api/users/resend-confirmation', {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data)
@@ -42,7 +42,7 @@ export async function resendEmail(data) {
 
 //パスワードを忘れた場合のメール送信
 export async function sendPasswordMail(data) {
-    const response = await fetch('/send_newuser', {
+    const response = await fetch('/api/users/password-forget', {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data)

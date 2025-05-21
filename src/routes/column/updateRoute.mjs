@@ -6,7 +6,7 @@ import { authenticate } from '../../middlewares/authenticate.mjs';
 
 const router = express.Router();
 //3コラ更新
-router.put('/update/:id',authenticate,
+router.put('/api/columns/:id',authenticate,
     body('title').notEmpty(),
     body('content').notEmpty(),
     body('date').notEmpty(),

@@ -8,6 +8,6 @@ export const getViewDbModel = async (id) => {
               return {column,feeling,autothink}
        } catch (error) {
               logger.error("[model]Error during database getPage:", error);
-              throw new Error("データベースの取得に失敗しました")
+              throw new Error("Database fetch failed")
        }
 }

@@ -1,6 +1,6 @@
 //タイトル検索
 export async function getTitle(search_result) {
-    const response = await fetch(`/search?search=${search_result}`, {
+    const response = await fetch(`/api/columns/title?search=${search_result}`, {
         method: "get",
         headers: { "content-type": "application/json" },
     })
@@ -13,7 +13,7 @@ export async function getTitle(search_result) {
 
 //年月で検索
 export async function sortYearMonth(queryParams) {
-    const response = await fetch(`/searchDate?${queryParams}`, {
+    const response = await fetch(`/api/columns/date?${queryParams}`, {
         method: "get",
         headers: { "content-type": "application/json" },
     })

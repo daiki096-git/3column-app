@@ -17,10 +17,7 @@ router.post('/api/users',
     .isEmail().withMessage("無効なメールアドレス形式です"),
   body("userpassword")
     .notEmpty().withMessage("パスワードは必須です")
-    .isLength({ min: 8, max: 20 }).withMessage("パスワードは8文字以上20文字以下を入力してください")
-    .matches(/[A-Z]/).withMessage("パスワードは少なくとも1つの大文字を含んでください")
-    .matches(/[a-z]/).withMessage("パスワードは少なくとも1つの小文字を含んでください")
-    .matches(/\d/).withMessage("パスワードは少なくとも1つの数字を含んでください"),
+    .isLength({ min: 8, max: 20 }).withMessage("パスワードは8文字以上20文字以下を入力してください"),
   requestErrorHandler(newUserController))
 
 //ユーザー新規登録画面に遷移

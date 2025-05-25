@@ -2,6 +2,9 @@
   display: flex;
   margin-left: 440px;
 }
+body {
+  overflow-x: hidden;
+}
 .column-container {
   width: 100%;
   max-width: 600px;

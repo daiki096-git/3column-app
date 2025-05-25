@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3コラ編集画面</title>
   <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
@@ -10,8 +11,10 @@
 <body>
   <header>
     <h1 class="login">3columnツール</h1>
-    <a href="/top" class="form">一覧に戻る</a>
-    <a href="/login" class="form">ログアウト</a>
+    <div class="form-links">
+      <a href="/top">一覧に戻る</a>
+      <a href="/login">ログアウト</a>
+    </div>
   </header>
   <div class="column-container">
     <ul class="table-body">
@@ -55,12 +58,11 @@
 
             <div class="main_name">
               <label for="message">②気分・感情とその強度(％)</label>
-              <a href="" class="feel_express" id="feel_express">気分・感情の表現一覧(思い浮かばない人向け)</a>
+              <a href="" class="feel_express" id="feel_express">気分・感情の一覧はこちら</a>
             </div>
             <%for(let i=0;i< 5;i++){ %>
-              <div class="row">
-                <textarea name="memo_feeling" id="feeling<%=i+1%>" class="text_title_feel" placeholder="気分・感情を入力してください"
-                  rows="2" cols="25"><%= feel[i]?.feeling || '' %></textarea>
+              <div class="row_write">
+                <textarea name="memo_feeling" id="feeling<%=i+1%>" class="searchInput" placeholder="気分・感情を入力してください"><%= feel[i]?.feeling || '' %></textarea>
                 <% let feeling_per_default=(feel[i]?.feelingPer ||0)+"%" %>
                   <select id="feeling_per" class="per_edit" name="memo_feeling_per">
                     <% for (let j=0; j <=100; j++) { %>
@@ -77,9 +79,8 @@
                   <label for="message">③認知(考え・イメージ)とその確信度(％)</label>
                 </div>
                 <% for(let i=0;i< 5;i++){ %>
-                  <div class="row">
-                    <textarea name="memo_autothink" id="autothink<%=i+1%>" placeholder="自動思考を入力してください"
-                      class="text_title_feel" rows="2" cols="25"><%=autothink[i]?.autoThink || ''%></textarea>
+                  <div class="row_write">
+                    <textarea name="memo_autothink" id="autothink<%=i+1%>" placeholder="自動思考を入力してください" class="searchInput"><%=autothink[i]?.autoThink || ''%></textarea>
 
                     <% let autothink_per_default=(autothink[i]?.autoThinkPer ||0)+"%"; %>
                       <select id="autothink_per" class="per_edit" name="memo_autothink_per">
@@ -97,13 +98,13 @@
                     <div class="main_name">
                       <label for="message">④身体的反応</label>
                     </div>
-                    <textarea name="physical" id="physical" class="text_response" rows="4"
+                    <textarea name="physical" id="physical" class="text_title" rows="4"
                       cols="25"><%=memo.physical%></textarea>
 
                     <div class="main_name">
                       <label for="message">⑤実際どうしたか</label>
                     </div>
-                    <textarea name="action_content" id="action" class="text_response" rows="4"
+                    <textarea name="action_content" id="action" class="text_title" rows="4"
                       cols="50"><%=memo.action%></textarea>
                     <div class="main_name">
                       <label for="message">⑥気づき</label>

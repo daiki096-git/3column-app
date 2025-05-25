@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3コラ新規作成画面</title>
   <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
@@ -10,8 +11,10 @@
 <body>
   <header>
     <h1 class="login">3columnツール</h1>
-    <a href="/top" class="form">一覧に戻る</a>
-    <a href="/login" class="form">ログアウト</a>
+    <div class="form-links">
+      <a href="/top">一覧に戻る</a>
+      <a href="/login">ログアウト</a>
+    </div>
   </header>
   <div class="column-container">
     <ul class="table-body">
@@ -21,9 +24,11 @@
             <div class="main_name">
               <label for="message">①具体的場面</label>
             </div>
+             <div class="top-data">
+              <label for="message">(タイトルを入力してください)</label>
+            </div>
             <div class="title">
-              <textarea id="title" name="title" class="text_title" placeholder="タイトルを入力してください
-(例)会社のプレゼン前"></textarea>
+              <textarea id="title" name="title" class="text_title" placeholder="(例)会社のプレゼン"></textarea>
             </div>
             <div class="top-data">
               <label for="message">(出来事の日付を選択してください)</label>
@@ -31,19 +36,24 @@
             <div class="title">
               <input type="date" id="datePicker" name="date" class="text_title_date">
             </div>
-            <div class="title">
-              <textarea id="where" name="title" rows="2" cols="25" class="text_title" placeholder="出来事の場所を入力してください
-(例)自宅で"></textarea>
+             <div class="top-data">
+              <label for="message">(出来事の場所を入力してください)</label>
             </div>
             <div class="title">
-              <textarea id="who" name="title" rows="2" cols="25" class="text_title" placeholder="誰との出来事か入力してください
-(例)一人で"></textarea>
+              <textarea id="where" name="title" rows="2" cols="25" class="text_title" placeholder="(例)自宅で"></textarea>
+            </div>
+             <div class="top-data">
+              <label for="message">(誰との出来事かを入力してください)</label>
+            </div>
+            <div class="title">
+              <textarea id="who" name="title" rows="2" cols="25" class="text_title" placeholder="(例)一人で"></textarea>
+            </div>
+             <div class="top-data">
+              <label for="message">(出来事の具体的な状況を入力してください)</label>
             </div>
             <div class="content">
               <div class="content">
-                <textarea id="content" name="content" rows="4" cols="50" class="text_content"
-                  placeholder="出来事の具体的な状況を入力してください
-(例)まだ作成できていない資料の説明をしなければならないことを考えながらソファに座っているとき"></textarea>
+                <textarea id="content" name="content" rows="4" cols="50" class="text_content" placeholder="(例)まだ作成できていない資料の説明をしなければならないことを考えながらソファに座っているとき"></textarea>
               </div>
             </div>
             <input type="hidden" id="per_id_1">
@@ -58,80 +68,59 @@
             <input type="hidden" id="per_id_10">
             <div class="main_name">
               <label for="message">②気分・感情とその強度(％)</label>
-              <a href="" class="feel_express" id="feel_express">気分・感情の表現一覧(思い浮かばない人向け)</a>
+              <a href="" class="feel_express" id="feel_express">気分・感情一覧はこちら</a>
             </div>
             <div class="row_write">
-              <div class="dropdown">
-                <!--   <input type="text" id="searchInput" placeholder="気分・感情を選択してください" onkeyup="filterOptions()">-->
                 <input type="text" id="feeling1" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
-                <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
+                <div id="dropdownContent" class="dropdown-content"></div>              
               <select id="per" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="row_write">
-              <div class="dropdown">
                 <input type="text" id="feeling2" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
                 <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
               <select id="per_2" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="row_write">
-              <div class="dropdown">
                 <input type="text" id="feeling3" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
                 <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
               <select id="per_3" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="row_write">
-              <div class="dropdown">
                 <input type="text" id="feeling4" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
                 <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
               <select id="per_4" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="row_write">
-              <div class="dropdown">
                 <input type="text" id="feeling5" class="searchInput" placeholder="気分・感情を入力してください" name="feeling">
                 <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
               <select id="per_5" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="main_name">
               <label for="message">③認知(考え・イメージ)とその確信度(％)</label>
             </div>
             <div class="row_write">
-              <div class="dropdown">
                 <input type="text" id="autothink1" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
                 <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
               <select id="per_6" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="row_write">
-              <div class="dropdown">
                 <input type="text" id="autothink2" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
                 <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
               <select id="per_7" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="row_write">
-              <div class="dropdown">
                 <input type="text" id="autothink3" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
                 <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
               <select id="per_8" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="row_write">
-              <div class="dropdown">
                 <input type="text" id="autothink4" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
                 <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
               <select id="per_9" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="row_write">
-              <div class="dropdown">
                 <input type="text" id="autothink5" class="searchInput" placeholder="自動思考を入力してください" name="feeling">
                 <div id="dropdownContent" class="dropdown-content"></div>
-              </div>
               <select id="per_10" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
           </div>
@@ -139,25 +128,19 @@
             <label for="message">④身体的反応</label>
           </div>
           <div class="title">
-            <textarea id="physical" name="physical" rows="2" cols="25" class="text_content"
-              placeholder="出来事による身体的反応を入力してください
-(例)動悸、不眠"></textarea>
+            <textarea id="physical" name="physical" rows="2" cols="25" class="text_content" placeholder="(例)動悸、不眠"></textarea>
           </div>
           <div class="main_name">
             <label for="message">⑤実際どうしたか</label>
           </div>
           <div class="content">
-            <textarea id="action" name="action_content" rows="4" cols="50" class="text_content"
-              placeholder="出来事に対して実際行った行動を入力してください
-(例)自分を落ち着かせるために入浴した"></textarea>
+            <textarea id="action" name="action_content" rows="4" cols="50" class="text_content" placeholder="(例)自分を落ち着かせるために入浴した"></textarea>
           </div>
           <div class="main_name">
             <label for="message">⑥気づき</label>
           </div>
           <div class="content">
-            <textarea id="notion" name="realize" rows="4" cols="50" class="text_content"
-              placeholder="書いてみて気づいたことを入力してください
-(例)気持ちが落ち着いた"></textarea>
+            <textarea id="notion" name="realize" rows="4" cols="50" class="text_content" placeholder="(例)気持ちが落ち着いた"></textarea>
           </div>
           <div class="registerbutton">
             <button type="button" id="register_button" class="button_register">登録</button>
@@ -167,7 +150,7 @@
     </ul>
 
   </div>
-<script type="module" src="/js/pages/new_form.js"></script>
+  <script type="module" src="/js/pages/new_form.js"></script>
 </body>
 
 </html>

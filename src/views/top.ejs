@@ -3,15 +3,18 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>トップ画面</title>
   <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 
 <body>
   <header>
-    <a href="/new_form" class="form">新規３coumn登録</a>
     <h1 class="login">3columnツール</h1>
-    <a href="/login" class="form">ログアウト</a>
+    <div class="form-links">
+      <a href="/new_form" class="form">３coumn登録</a>
+      <a href="/login" class="form">ログアウト</a>
+    </div>
   </header>
 
   <% if (typeof error!=='undefined' ) { %>
@@ -21,11 +24,10 @@
     <% } %>
 
       <div class="search">
-        <input type="text" id="search" name="search" class="search_title" placeholder="タイトルを入力してください(部分一致検索可能)">
+        <input type="text" id="search" name="search" class="search_title" placeholder="タイトル検索(部分一致可能)">
         <input type="hidden" name="userid" id="userid" value="<%= userid %>">
-        <button type="click" class="button_search" id="search_button">検索</button>
-        <button type="click" class="button_search_release" name="release" value="true"
-          id="release_button">検索を解除</button>
+        <button type="button" class="button_search" id="search_button">検索</button>
+        <button type="button" class="button_search_release" name="release" value="true" id="release_button">検索を解除</button>
       </div>
       <div class="sort">
         <button type="button" id="sort_button">年月で絞り込む</button>

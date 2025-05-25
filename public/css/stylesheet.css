@@ -2,26 +2,175 @@
   display: flex;
   margin-left: 440px;
 }
-
 .column-container {
-  width: 80%;              /* 必要に応じて 600px や max-width を指定してもOK */
-  margin-right:16%;         /* 左右中央に配置 */
-  margin-left: 30%;   
-  padding: 5px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
 }
+.table-body li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  list-style: none;
+}
+.text_title_date {
+  width: 100%;
+  padding-bottom: 20px;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.text_title {
+  width: 100%;
+  padding-bottom: 20px;
+  height: 20px;
+}
+.text_title_feel {
+  width: 100%;
+  height: 30px;
+}
+.text_title_select {
+  padding: 10px;
+}
+.text_content {
+  width: 100%;
+  height: 50px;
+}
+.searchInput {
+  flex: 8;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.per {
+  flex: 2;
+  height: 40px;
+}
+.per_edit {
+  flex: 2;
+  height: 50px;
+}
+.row_write {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.registerbutton {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 10px;
+}
+.button_register {
+  padding: 10px 20px;
+}
+.button_container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 10px auto 0;
+  box-sizing: border-box;
+}
+.button_update,
+.button_delete {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+@media screen and (max-width: 600px) {
+  .main_name label {
+    font-size: 10px;
+  }
+  .column-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+  }
 
+  .text_title,
+  .text_title_date,
+  .text_content {
+    font-size: 14px;
+    width: 100%;
+  }
 
+  .dropdown {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+  }
+  .searchInput {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .per {
+    height: 40px;
+  }
+  .per_edit {
+    height: 50px;
+  }
+  .table-body li {
+    flex-direction: column;
+    width: 100%;
+  }
+  .registerbutton {
+    justify-content: center;
+  }
+  .button_register {
+    width: 100%;
+    max-width: 200px;
+  }
+  .button_container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .button_update,
+  .button_delete {
+    width: 100%;
+    max-width: 300px;
+  }
+}
 textarea::placeholder {
-  font-size: 12px; /* フォントサイズを小さく */
-  color: rgba(0, 0, 0, 0.5); /* 色を薄く（透明度0.5） */
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
 }
-
 header {
   position: relative;
   background-color: #dff6ff;
-  height: 80px;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
-
+.form-links {
+  display: flex;
+  gap: 10px;
+  white-space: nowrap;
+}
+.form-links a {
+  font-size: 15px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.login {
+  font-size: 20px;
+  color: #003366;
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .login {
+    font-size: 14px;
+  }
+  .form-links a {
+    font-size: 12px;
+  }
+}
 .button_login {
   padding-right: 20px;
   padding-left: 20px;
@@ -44,82 +193,103 @@ header {
   padding: 10px;
   width: 250px;
 }
-
-.login,
-.memo {
-  position: absolute;
-  font-size: 30px;
-  padding-top: 5px;
-  padding-left: 30px;
-  padding-bottom: 20px;
-  color: #003366;
-  font-size: 20px;
-  margin-top: 20px;
-
-
-}
-
 .form-group {
-
   text-align: center;
   padding-top: 200px;
   padding-bottom: 10px;
 }
-
 .user_register {
   text-align: center;
 }
-
 .user_content {
   text-align: center;
   margin-top: 100px;
-
 }
-
 .date-header p {
   text-decoration: underline;
   font-size: 15px;
 }
-
 .name {
   font-size: 15px;
 }
-.top-data{
+.top-data {
   color: rgba(0, 0, 0, 0.7);
-  font-size:14px
+  font-size: 10px
 }
-.top-data-title{
+.top-data-title {
   color: rgba(0, 0, 0, 1.0);
-  font-size:14px
-
+  font-size: 14px
 }
 .main_name {
-  color: #1a1a2e; 
-  font-weight: 500; 
-  font-size: 5px; 
+  font-size: 15px;
+  text-decoration: underline;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #1a1a2e;
+  font-weight: 500;
   display: block;
-  margin-bottom: 2px; /* 下の余白を少し広げる */
+  margin-bottom: 2px;
   white-space: nowrap;
-  letter-spacing: 0.5px; /* 文字間隔を少し広げる */
+  letter-spacing: 0.5px;
 }
 .form-group-address {
   padding-bottom: 20px;
 }
-
 .form-group-pass {
   padding-bottom: 20px;
 }
-
 .search {
-  text-align: center;
-  padding-top: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 10px;
+  overflow-x: auto;
 }
 
-.form {
-  float: right;
+.search_title {
   font-size: 15px;
-  padding-right: 20px;
-  padding-top: 30px
+  padding: 10px;
+  width: 60vw;
+  max-width: 400px;
+  min-width: 100px;
+  box-sizing: border-box;
+}
+
+.button_search {
+  padding: 10px;
+  font-size: 14px;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.button_search_release {
+  padding: 10px;
+  display: none;
+  font-size: 14px;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+@media (max-width: 480px) {
+  .search {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .search_title {
+    width: 70vw;
+    font-size: 10px;
+  }
+
+  .button_search {
+    font-size: 10px;
+  }
+
+  .button_search_release {
+    font-size: 10px;
+    display: none;
+  }
 }
 
 .alert {
@@ -131,45 +301,11 @@ header {
   margin-left: 10px;
 }
 
-
-.table-body li {
-  display: flex;
-  margin-bottom: 10px;
-  list-style: none;
-
-}
-
-.text_title_date {
-  width: 500px;
-  padding-bottom: 20px;
-  font-size: 15px;
-  margin-bottom: 5px;
-}
-
-.text_title {
-  width: 500px;
-  padding-bottom: 20px;
-  height: 20px;
-}
-
-.text_content {
-  width: 500px;
-  height: 50px;
-}
-
-.text_response{
-  width: 500px;
-  height: 30px;
-
-
-}
 .date-header {
   display: flex;
   flex-direction: column;
   gap: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-
-
 }
 
 .slide-container {
@@ -181,15 +317,12 @@ header {
   justify-content: space-between;
   margin: 0 auto;
   max-width: 800px;
-
 }
 
 .slide-wrapper {
   overflow: hidden;
   width: 90%;
   max-width: 100%;
-
-
 }
 
 .slide-item {
@@ -200,7 +333,6 @@ header {
 }
 
 .test {
-
   display: flex;
   gap: 10px;
   scroll-behavior: smooth;
@@ -210,10 +342,6 @@ header {
   width: 100%;
   overflow: hidden;
   margin-right: 20px;
-
-
-
-
 }
 
 .item-container {
@@ -227,13 +355,11 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   font-size: 16px;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.1s;
-
 }
 
 .item-container:hover {
@@ -242,11 +368,6 @@ header {
 
 .item-container:active {
   transform: scale(0.95);
-}
-
-.error_word {
-
-  font-size: red;
 }
 
 .prev-btn,
@@ -273,20 +394,6 @@ header {
 .next-btn {
   right: 0;
   margin-right: 20px;
-
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-  width: 200px;
-}
-
-.searchInput {
-  width: 400px;
-  padding: 10px;
-  box-sizing: border-box;
-
 }
 
 .dropdown-content {
@@ -314,43 +421,6 @@ header {
   display: block;
 }
 
-.per {
-  width: 100px;
-  height: 40px;
-  margin-left: 200px
-}
-
-.per_edit {
-  width: 100px;
-  height: 40px;
-}
-
-.think_wrapper {
-  width: 1000px;
-
-}
-
-.search_title {
-  font-size: 15px;
-  padding: 10px;
-  width: 500px;
-
-}
-
-.main_name {
-  font-size: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.feel_container {
-  display: inline-block;
-}
-
-.text_title_select {
-  padding: 10px;
-}
-
 .row {
   display: flex;
   gap: 10px;
@@ -359,66 +429,8 @@ header {
   width: 510px;
 }
 
-.text_title_feel {
-  width: 500px;
-  height: 30px;
-}
-
-.button_update {
-  margin-left: 350px;
-  margin-top: 40px;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-right: 10px;
-
-}
-
-.button_register {
-  margin-left: 440px;
-  margin-top: 30px;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-right: 10px;
-
-}
-
-.button_delete {
-  margin-top: 40px;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-
-}
-
-.button_container {
-  display: flex;
-}
-
-.button_search {
-  padding: 10px;
-}
-
-.button_search_release {
-  padding: 10px;
-  display: none;
-}
-
-.row_write {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 10px;
-  width: 700px;
-
-}
-
 .feel_express {
-  font-size: 15px;
+  font-size: 10px;
 }
 
 .sendmail {
@@ -431,7 +443,8 @@ header {
   font-size: 10px;
 }
 
-#sort_button,#sort_release{
+#sort_button,
+#sort_release {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -443,10 +456,20 @@ header {
   margin-left: 30px;
 }
 
-#sort_button:hover,#sort_release:hover {
+#sort_button:hover,
+#sort_release:hover {
   background-color: lightgray;
 }
 
+@media (max-width: 480px) {
+
+  #sort_button,
+  #sort_release {
+    font-size: 10px;
+    padding: 6px 12px;
+    margin-left: 10px;
+  }
+}
 
 .modal {
   display: none;
@@ -486,7 +509,7 @@ header {
   display: flex;
   gap: 8px;
   margin-top: 16px;
-  margin-left:40px;
+  margin-left: 40px;
 }
 
 .pagination button {
@@ -494,7 +517,7 @@ header {
   border: 1px solid #ccc;
   background: #f0f0f0;
   cursor: pointer;
-  font-size:15px;
+  font-size: 15px;
 }
 
 .pagination button.active {

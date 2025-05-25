@@ -23,7 +23,7 @@ router.get('/search_result', (req, res) => {
   if(req.query.message){
     return res.render('top.ejs', { date: searchData.date, userid: searchData.userid ,filter:isFilter,current:req.session.userData.current,total:req.session.userData.total}) 
   }
-  res.render('top.ejs', { date: searchData.date, userid: searchData.userid ,filter:isFilter})
+  res.render('top.ejs', { date: searchData.date,userid:req.session.userid,filter:isFilter,current:req.session.userData.current,total:req.session.userData.total})
 })
 
 export default router

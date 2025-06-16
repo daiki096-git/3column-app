@@ -14,16 +14,21 @@ router.get('/api/columns/title', authenticate,
   requestErrorHandler(searchController))
 
 //年月で検索
-router.get('/api/columns/date',authenticate,getYearDateController)
+router.get('/api/columns/date', authenticate, getYearDateController)
 
 //検索結果を返す
 router.get('/search_result', (req, res) => {
   const searchData = req.session.searchData
-  const isFilter=req.query.filter==="true"?true:false;
-  if(req.query.message){
-    return res.render('top.ejs', { date: searchData.date, userid: searchData.userid ,filter:isFilter,current:req.session.userData.current,total:req.session.userData.total}) 
+  let searchResultNumber= 0;
+  for (const key in searchData.date) {
+    searchResultNumber += searchData.date[key].length;
   }
-  res.render('top.ejs', { date: searchData.date,userid:req.session.userid,filter:isFilter,current:req.session.userData.current,total:req.session.userData.total})
+  const total=Math.ceil(searchResultNumber/10)
+  const isFilter = req.query.filter === "true" ? true : false;
+  if (req.query.message) {
+    return res.render('top.ejs', { date: searchData.date, userid: searchData.userid, filter: isFilter, current:1, total: total })
+  }
+  res.render('top.ejs', { date: searchData.date, userid: req.session.userid, filter: isFilter, current: 1, total: total })
 })
 
 export default router

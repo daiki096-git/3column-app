@@ -3,6 +3,7 @@ import { getTitle,sortYearMonth } from "../api/search.js"
 //タイトル検索
 document.getElementById("search_button").addEventListener('click', async (event) => {
     const search_result = document.getElementById("search").value
+
     if (search_result === "") {
         return alert("空白です")
     }
@@ -110,14 +111,17 @@ document.addEventListener("DOMContentLoaded", () => {
     //タイトル検索ボタンの表示
     if (document.getElementById("filter").value === "true") {
         const search = document.getElementById("search");
-        const search_button = document.getElementById("search_button")
+        const search_button = document.getElementById("search_button");
+        const pagination=document.getElementById("pagination");
         search.style.display = "none";
         search_button.style.display = "none";
         sortButton.style.display = "none";
         sortRelease.style.display = "inline-block";
+        pagination.style.display="none"
     } else {
         sortButton.style.display = "inline-block";
         sortRelease.style.display = "none";
+        pagination.style.display="inline-block"
     }
     const rel = document.getElementById("rel");
     const rel_button = document.getElementById("release_button")
@@ -127,10 +131,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const search = document.getElementById("search_button")
         search.style.display = "none";
         rel_button.style.display = "inline";
+        pagination.style.display="none"
         document.getElementById("search").readOnly = true
     }
     rel_button.addEventListener('click', async (event) => {
         document.getElementById("search").readOnly = false
+        pagination.style.display="inline-block"
         window.location.href = "/top"
 
     })

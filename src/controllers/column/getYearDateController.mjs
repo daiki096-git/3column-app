@@ -1,11 +1,12 @@
 import logger from "../../../config/logger.mjs";
+import { getAllSortDate } from "../../services/getSortDate.mjs";
 
 export const getYearDateController = async (req, res) => {
     try {
         const userid = req.session.userid;
         const year = req.query.year;
         const month = req.query.month;
-        const getDate = req.session.userData
+        const getDate = await getAllSortDate(userid)
 
         let result = {}
         if (month !== "none") {
@@ -29,6 +30,7 @@ export const getYearDateController = async (req, res) => {
             date: result,
             userid: userid
         }
+        console.log(req.session.searchData)
         res.status(200).json({ success: true })
     } catch (error) {
         logger.error("[controller]database connection failed", error);

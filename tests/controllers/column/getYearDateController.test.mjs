@@ -3,10 +3,14 @@ vi.mock('../../../config/logger.mjs', () => ({
     error: vi.fn()
   }
 }));
+vi.mock('../../../src/services/getSortDate.mjs', () => ({
+  getAllSortDate: vi.fn()
+}));
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getYearDateController } from '../../../src/controllers/column/getYearDateController.mjs';
 import logger from '../../../config/logger.mjs';
+import { getAllSortDate } from '../../../src/services/getSortDate.mjs';
 
 describe('getYearDateController', () => {
   let mockReq, mockRes;
@@ -18,12 +22,13 @@ describe('getYearDateController', () => {
         userid: '2',
         userData: {
           date: {
-            '2025/5/01': Array(1),
-            '2025/5/15': Array(1),
-            '2024/6/01': Array(1),
-            '2023/5/01': Array(1)
+            '2025/5/01': [ { item: 'data' } ],
+            '2025/5/15': [ { item: 'data' } ],
+            '2024/6/01': [ { item: 'data' } ],
+            '2023/5/01': [ { item: 'data' } ]
           }
-        }
+        },
+        searchData: {}, 
       },
       query: {}
     };
@@ -35,13 +40,20 @@ describe('getYearDateController', () => {
 
   it('指定の年月に一致するデータのみ返す', async () => {
     mockReq.query = { year: '2025', month: '05' };
-
+    getAllSortDate.mockResolvedValue({
+      date: {
+        '2025/5/01': [{ item:'data'}],
+        '2025/5/15': [{ item:'data' }],
+        '2025/4/01': [{ item: 'data'}],
+        '2024/6/01': [{ item: 'data'}]
+      }
+    });
     await getYearDateController(mockReq, mockRes);
 
     expect(mockReq.session.searchData).toEqual({
       date: {
-        '2025/5/01': Array(1),
-        '2025/5/15': Array(1)
+        '2025/5/01': [ { item: 'data' } ],
+        '2025/5/15': [ { item: 'data' } ],
       },
       userid: '2'
     });
@@ -51,12 +63,20 @@ describe('getYearDateController', () => {
 
   it('月がnoneの場合、指定の年に一致するすべてのデータを返す', async () => {
     mockReq.query = { year: '2024', month: 'none' };
+    getAllSortDate.mockResolvedValue({
+      date: {
+        '2025/5/01': [{ item:'data'}],
+        '2025/5/15': [{ item:'data' }],
+        '2025/4/01': [{ item: 'data'}],
+        '2024/6/01': [{ item: 'data'}]
+      }
+    });
 
     await getYearDateController(mockReq, mockRes);
 
     expect(mockReq.session.searchData).toEqual({
       date: {
-        '2024/6/01': Array(1)
+        '2024/6/01': [ { item: 'data' } ]
       },
       userid: '2'
     });
@@ -66,6 +86,14 @@ describe('getYearDateController', () => {
 
   it('一致するデータがない場合、メッセージとともに返す', async () => {
     mockReq.query = { year: '2022', month: '05' };
+    getAllSortDate.mockResolvedValue({
+      date: {
+        '2025/5/01': [{ item:'data'}],
+        '2025/5/15': [{ item:'data' }],
+        '2025/4/01': [{ item: 'data'}],
+        '2024/6/01': [{ item: 'data'}]
+      }
+    });
 
     await getYearDateController(mockReq, mockRes);
 

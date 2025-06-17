@@ -123,7 +123,7 @@ input::placeholder{
   }
   .table-body li {
     flex-direction: column;
-    width: 100%;
+    width: 90%;
   }
   .registerbutton {
     justify-content: center;

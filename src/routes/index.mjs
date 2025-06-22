@@ -6,6 +6,7 @@ import registerRoute from "./column/registerRoute.mjs";
 import updateRoute from "./column/updateRoute.mjs";
 import searchRoute from "./column/searchRoute.mjs";
 import userRoute from "./user/userRoute.mjs";
+import apiAdvice from "./advice/apiAdvice.mjs";
 
 const router=express.Router();
 
@@ -16,5 +17,6 @@ router.use(registerRoute);
 router.use(updateRoute);
 router.use(searchRoute);
 router.use(userRoute);
+router.use(apiAdvice)
 
 export default router;

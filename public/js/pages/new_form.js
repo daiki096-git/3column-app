@@ -1,4 +1,5 @@
 import { registerColumn } from "../api/column.js";
+import { aiAskColumn } from "../api/advice.js";
 
 //新規登録
 document.getElementById("register_button").addEventListener('click', async (event) => {
@@ -50,6 +51,63 @@ document.getElementById("register_button").addEventListener('click', async (even
         alert(error?.message || '通信エラーが発生しました。再試行してください。');
     }
 })
+//AIに聞いてみる
+document.getElementById("ai_register_button").addEventListener('click', async (event) => {
+    const perElements = document.querySelectorAll('select.per');
+    const per = Array.from(perElements).map(select => select.value);
+    const content = document.getElementById("content").value;
+    const action = document.getElementById("action").value;
+    const feeling1 = document.getElementById("feeling1").value;
+    const feeling2 = document.getElementById("feeling2").value;
+    const feeling3 = document.getElementById("feeling3").value;
+    const feeling4 = document.getElementById("feeling4").value;
+    const feeling5 = document.getElementById("feeling5").value;
+    const autothink1 = document.getElementById("autothink1").value;
+    const autothink2 = document.getElementById("autothink2").value;
+    const autothink3 = document.getElementById("autothink3").value;
+    const autothink4 = document.getElementById("autothink4").value;
+    const autothink5 = document.getElementById("autothink5").value;
+
+    if (content === "" || action === "" || feeling1 === "" || autothink1 === "") {
+        return alert("空白があります")
+    }
+    const feelings = [feeling1, feeling2, feeling3, feeling4, feeling5]
+    const autothinks = [autothink1, autothink2, autothink3, autothink4, autothink5]
+    let feeling_obj = {}
+    let autothink_obj = {}
+    feelings.forEach((feeling, i) => {
+        if (feeling !== "") {
+            feeling_obj[feeling] = per[i];
+        }
+    });
+    autothinks.forEach((autothink, i) => {
+        if (autothink !== "") {
+            autothink_obj[autothink] = per[i + 5]
+        }
+    })
+    const data = { content, action, feeling_obj, autothink_obj }
+    try {
+        const result = await aiAskColumn(data)
+        const modal = document.getElementById("modal");
+        const modalContent = document.getElementById("modalContent");
+        modalContent.textContent=result.result;
+        modal.style.display="block";
+        document.getElementById("modalOverlay").style.display="block"
+    } catch (error) {
+        console.error('エラーが発生しました:', error);
+        alert(error?.message || '通信エラーが発生しました。再試行してください。');
+    }
+})
+document.getElementById('closeModal').addEventListener('click', () => {
+  document.getElementById('modal').style.display = 'none';
+  document.getElementById('modalOverlay').style.display = 'none';
+});
+document.getElementById('modalOverlay').addEventListener('click', () => {
+  document.getElementById('modal').style.display = 'none';
+  document.getElementById('modalOverlay').style.display = 'none';
+});
+
+
 //パーセンテージ追加
 const per = document.getElementById("per");
 const per2 = document.getElementById("per_2");

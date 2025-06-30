@@ -68,6 +68,7 @@ describe('loginVerifyController', () => {
       current: 1,
       userid: 1,
       total: 2,
+      mail:"test@example.com"
     })
     expect(res.status).toHaveBeenCalledWith(200)
     expect(res.json).toHaveBeenCalledWith({ message: 'ログイン成功' })

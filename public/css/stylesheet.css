@@ -5,6 +5,10 @@
 body {
   overflow-x: hidden;
 }
+.mail{
+  font-size:10px;
+  color:#555555
+}
 input,textarea,select{
   font-size: 12px;
 }
@@ -152,7 +156,7 @@ textarea::placeholder {
 header {
   position: relative;
   background-color: #dff6ff;
-  height: 70px;
+  min-height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -160,27 +164,38 @@ header {
   flex-wrap: nowrap;
   overflow-x: auto;
 }
+.login {
+  font-size: 20px;
+  color: #003366;
+  white-space: nowrap;
+}
 .form-links {
   display: flex;
   gap: 10px;
   white-space: nowrap;
+  align-items: center;
 }
 .form-links a {
   font-size: 15px;
   text-decoration: none;
   white-space: nowrap;
 }
-.login {
-  font-size: 20px;
-  color: #003366;
-  white-space: nowrap;
-}
+
 @media (max-width: 480px) {
   .login {
     font-size: 14px;
   }
+  .form-links {
+    flex-direction: column; 
+    align-items: flex-end; 
+    gap: 6px;
+  }
   .form-links a {
     font-size: 12px;
+    white-space: normal; 
+  }
+  .mail{
+    font-size:5px;
   }
 }
 .button_login {

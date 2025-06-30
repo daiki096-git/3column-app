@@ -7,6 +7,7 @@ import { getSortDate } from "../../services/getSortDate.mjs";
 export const loginVerifyController = async (req, res) => {
     try {
       const mail = req.body.mail;
+      req.session.mail=mail
       const password = req.body.password;
       const results = await getAddressDbModel(mail)
       if (results[0].length === 0) {
@@ -24,6 +25,7 @@ export const loginVerifyController = async (req, res) => {
       const page=1
       const result = await getSortDate(id,page);
       req.session.userData = {
+        mail:mail,
         date: result.date,
         current:page,
         userid: result.userid,

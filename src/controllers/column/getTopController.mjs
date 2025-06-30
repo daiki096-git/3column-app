@@ -15,7 +15,7 @@
             }
         }
         const userData = req.session.userData
-        res.render('top.ejs', { date: userData.date, userid: req.session.userid, filter: false,error:req.query.error,current:userData.current,total:userData.total})
+        res.render('top.ejs', { date: userData.date, mail:req.session.mail,userid: req.session.userid, filter: false,error:req.query.error,current:userData.current,total:userData.total})
     } catch (error) {
         logger.error("[controller]database get failed:",error)
         res.status(500).json({ message: error.message });

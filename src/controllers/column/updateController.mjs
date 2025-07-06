@@ -7,14 +7,14 @@ export const updateController = async (req, res) => {
         const id = req.params.id;
         const date = req.body.date;
         const title = req.body.title;
-        const place = req.body.where;
-        const who = req.body.who;
+        const place = req.body.where||"";
+        const who = req.body.who||"";
         const content = req.body.content;
         const feeling_obj = req.body.feeling_obj;
         const autothink_obj = req.body.autothink_obj;
-        const physical = req.body.physical;
-        const action = req.body.action;
-        const notion = req.body.notion;
+        const physical = req.body.physical||"";
+        const action = req.body.action||"";
+        const notion = req.body.notion||"";
         const result = await updateDbModel(date, title, place, who, content, feeling_obj, autothink_obj, physical, action, notion, id)
         if (!result) {
             logger.error("Database update failed.");

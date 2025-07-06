@@ -9,11 +9,8 @@ const router=express.Router();
 router.post('/api/columns',authenticate,
           body('title').notEmpty().withMessage("タイトルを入力してください"),
           body('content').notEmpty().withMessage("状況を入力してください"),
-          body('date').notEmpty().withMessage("日付を選択してください"),
-          body('where').notEmpty().withMessage("いつの出来事か入力してください"),
-          body('who').notEmpty().withMessage("誰との出来事か入力してください"),
-          body('physical').notEmpty().withMessage("身体的反応を入力してください"),
-          body('action').notEmpty().withMessage("その時の実際の行動を入力してください"),
+          body('feeling_obj').notEmpty().withMessage("最低1つは気分・感情を入力してください"),
+          body('autothink_obj').notEmpty().withMessage("最低1つは自動思考を入力してください"),
           requestErrorHandler(registerController));
 
 export default router;

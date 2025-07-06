@@ -34,11 +34,11 @@
                 </span>
                 <input type="hidden" name="created_at" value="<%= memo.created_at %>">
                 <div class="top-data">
-                  <label for="title">(タイトル)</label>
+                  <label for="title">(タイトル)</label><span id="necessary">必須</span>
                 </div>
                 <textarea name="title" id="title" class="text_title" rows="2" cols="25"><%=memo.title%></textarea>
                 <div class="top-data">
-                  <label for="title">(いつ)</label>
+                  <label for="title">(いつ)</label><span id="necessary">必須</span>
                 </div>
                 <input class="text_title_date" id="datePicker" name="date" type="date" value="<%=date %>">
               </div>
@@ -51,13 +51,13 @@
               </div>
               <textarea name="who" id="who" class="text_title" rows="2" cols="25"><%=memo.who%></textarea>
               <div class="top-data">
-                <label for="title">(どんな状況)</label>
+                <label for="title">(どんな状況)</label><span id="necessary">必須</span>
               </div>
               <textarea name="content" id="content" class="text_content" rows="2" cols="25"><%=memo.content%></textarea>
             </div>
 
             <div class="main_name">
-              <label for="message">②気分・感情とその強度(％)</label>
+              <label for="message">②気分・感情とその強度(％)</label><span id="necessary">必須(最低1つ)</span>
               <a href="" class="feel_express" id="feel_express">気分・感情の一覧はこちら</a>
             </div>
             <%for(let i=0;i< 5;i++){ %>
@@ -76,7 +76,7 @@
               </div>
               <% } %>
                 <div class="main_name">
-                  <label for="message">③認知(考え・イメージ)とその確信度(％)</label>
+                  <label for="message">③認知(考え・イメージ)とその確信度(％)</label><span id="necessary">必須(最低1つ)</span>
                 </div>
                 <% for(let i=0;i< 5;i++){ %>
                   <div class="row_write">

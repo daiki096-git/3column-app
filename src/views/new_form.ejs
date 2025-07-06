@@ -25,13 +25,13 @@
               <label for="message">①具体的場面</label>
             </div>
              <div class="top-data">
-              <label for="message">(タイトルを入力してください)</label>
+              <label for="message">(タイトルを入力してください)</label><span id="necessary">必須</span>
             </div>
             <div class="title">
               <textarea id="title" name="title" class="text_title" placeholder="(例)会社のプレゼン"></textarea>
             </div>
             <div class="top-data">
-              <label for="message">(出来事の日付を選択してください)</label>
+              <label for="message">(出来事の日付を選択してください)</label><span id="necessary">必須</span>
             </div>
             <div class="title">
               <input type="date" id="datePicker" name="date" class="text_title_date">
@@ -49,7 +49,7 @@
               <textarea id="who" name="title" rows="2" cols="25" class="text_title" placeholder="(例)一人で"></textarea>
             </div>
              <div class="top-data">
-              <label for="message">(出来事の具体的な状況を入力してください)</label>
+              <label for="message">(出来事の具体的な状況を入力してください)</label><span id="necessary">必須</span>
             </div>
             <div class="content">
               <div class="content">
@@ -67,7 +67,7 @@
             <input type="hidden" id="per_id_9">
             <input type="hidden" id="per_id_10">
             <div class="main_name">
-              <label for="message">②気分・感情とその強度(％)</label>
+              <label for="message">②気分・感情とその強度(％)</label><span id="necessary">必須(最低1つ)</span>
               <a href="" class="feel_express" id="feel_express">気分・感情一覧はこちら</a>
             </div>
             <div class="row_write">
@@ -96,7 +96,7 @@
               <select id="per_5" class="per" placeholder="％を選択してください" name="per"></select>
             </div>
             <div class="main_name">
-              <label for="message">③認知(考え・イメージ)とその確信度(％)</label>
+              <label for="message">③認知(考え・イメージ)とその確信度(％)</label><span id="necessary">必須(最低1つ)</span>
             </div>
             <div class="row_write">
                 <input type="text" id="autothink1" class="searchInput" placeholder="自動思考を入力してください" name="feeling">

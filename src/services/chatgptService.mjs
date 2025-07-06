@@ -7,7 +7,7 @@ const openai=new OpenAI({
     apiKey:process.env.OPEN_API_KEY,
 })
 
-export async function getAdviceFromChat(content, feeling_obj, autothink_obj,action) {
+export async function getAdviceFromChat(content, feeling_obj, autothink_obj) {
     
     const prompt=`
     以下は認知行動療法の3コラムです。
@@ -16,7 +16,6 @@ export async function getAdviceFromChat(content, feeling_obj, autothink_obj,acti
     ・感情:${JSON.stringify(feeling_obj)}
      →オブジェクトで{不快:80}等とあるがこれは、気分が不快で、その度合いが80%と読み取って
     ・自動思考:${JSON.stringify(autothink_obj)}
-    ・上記状況に対して実際にとった行動:${action}
      →オブジェクトで{腹が立つ:80}等とあるがこれは、自動思考が腹が立つで、その度合いが80%と読み取って
 
     この情報をもとに、共感しつつポジティブなアドバイスをください。`

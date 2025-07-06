@@ -3,11 +3,10 @@ import { getAdviceFromChat } from "../../services/chatgptService.mjs"
 
 export const apiAdviceController=async(req,res)=>{
     try{
-    const action=req.body.action;
     const content=req.body.content;
     const feeling_obj = req.body.feeling_obj;
     const autothink_obj = req.body.autothink_obj;
-    const result=await getAdviceFromChat(content,feeling_obj,autothink_obj,action)
+    const result=await getAdviceFromChat(content,feeling_obj,autothink_obj)
     return res.status(200).json({result})
 
     }catch(error){

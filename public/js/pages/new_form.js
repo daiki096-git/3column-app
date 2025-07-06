@@ -55,8 +55,10 @@ document.getElementById("register_button").addEventListener('click', async (even
 document.getElementById("ai_register_button").addEventListener('click', async (event) => {
     const perElements = document.querySelectorAll('select.per');
     const per = Array.from(perElements).map(select => select.value);
+    const title = document.getElementById("title").value;
+    const date = document.getElementById("datePicker").value;
     const content = document.getElementById("content").value;
-    const action = document.getElementById("action").value;
+    const action = document.getElementById("action").value||"";
     const feeling1 = document.getElementById("feeling1").value;
     const feeling2 = document.getElementById("feeling2").value;
     const feeling3 = document.getElementById("feeling3").value;
@@ -68,7 +70,7 @@ document.getElementById("ai_register_button").addEventListener('click', async (e
     const autothink4 = document.getElementById("autothink4").value;
     const autothink5 = document.getElementById("autothink5").value;
 
-    if (content === "" || action === "" || feeling1 === "" || autothink1 === "") {
+    if (title===""||date===""||content === "" || feeling1 === "" || autothink1 === "") {
         return alert("空白があります")
     }
     const feelings = [feeling1, feeling2, feeling3, feeling4, feeling5]

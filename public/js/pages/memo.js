@@ -36,7 +36,7 @@ document.getElementById("update_button").addEventListener('click', async (event)
   const autothink4 = document.getElementById("autothink4").value;
   const autothink5 = document.getElementById("autothink5").value;
 
-  if (title === "" || date === "" || where === "" || who === "" || content === "" || physical === "" || action === "" || feeling1 === "" || autothink1 === "") {
+  if (title === "" || date === ""|| content === ""|| feeling1 === "" || autothink1 === "") {
     return alert("空白があります")
   }
   const feelings = [feeling1, feeling2, feeling3, feeling4, feeling5]

@@ -21,6 +21,7 @@
             "hash": "308217cfe87b87c23dd9f841794e19f78579a95c156a5be8072b2ae906049899"
         },
         {
+<<<<<<< HEAD
             "date": 1750336638564,
             "name": "logs\\error-2025-06-19.log",
             "hash": "f532db0c7d29ec5cfe93e841aaa1780acb7798ed64fb32d6507e824f4e2861c8"
@@ -49,6 +50,16 @@
             "date": 1751285644781,
             "name": "logs\\error-2025-06-30.log",
             "hash": "2250947ec1793af5d6a87bc392af0c1c26f9d2ea7ddef67fbb7625232c880a39"
+=======
+            "date": 1751697108989,
+            "name": "logs\\error-2025-07-05.log",
+            "hash": "6d8ed36901a57884467b580d3279bddbf3087443af501638f8ea9cc9592c7f79"
+        },
+        {
+            "date": 1751777221410,
+            "name": "logs\\error-2025-07-06.log",
+            "hash": "051a8ae1b84d570ab5d9d6770ba03f3fc6ec94ee7008044aea9a6856c73433b6"
+>>>>>>> d8059e8 (３コラ登録時のバリデーション変更)
         }
     ],
     "hashType": "sha256"

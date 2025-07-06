@@ -9,11 +9,8 @@ const router = express.Router();
 router.put('/api/columns/:id',authenticate,
     body('title').notEmpty(),
     body('content').notEmpty(),
-    body('date').notEmpty(),
-    body('who').notEmpty(),
-    body('where').notEmpty(),
-    body('physical').notEmpty(),
-    body('action').notEmpty(),
+    body('feeling_obj').notEmpty(),
+    body('autothink_obj').notEmpty(),
     requestErrorHandler(updateController))
 
 export default router;

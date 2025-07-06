@@ -6,6 +6,7 @@
     "auditLog": "logs\\.52f6c5e5c0de513d85f9302c79fd4f18f5a79d62-audit.json",
     "files": [
         {
+<<<<<<< HEAD
             "date": 1751121114209,
             "name": "logs\\app-2025-06-28.log",
             "hash": "ddefcc01a7cae1c4f22b8cceef8a35df70fa08e55c527184ba418449a4353582"
@@ -19,6 +20,16 @@
             "date": 1751285644773,
             "name": "logs\\app-2025-06-30.log",
             "hash": "54ad0c82b3905f6107905c93bfcc5b03c2e5e35e988116c55017483e2295bce4"
+=======
+            "date": 1751697108978,
+            "name": "logs\\app-2025-07-05.log",
+            "hash": "0bdf1fbecc1aeb17c1463ced8e9f338a48f28c4f044082fc327664c0ef7da70d"
+        },
+        {
+            "date": 1751777221404,
+            "name": "logs\\app-2025-07-06.log",
+            "hash": "82c615fe1c04f0ec454da1ed7f95931a764427c9f163040e3139b0dfcdc5e1d3"
+>>>>>>> d8059e8 (３コラ登録時のバリデーション変更)
         }
     ],
     "hashType": "sha256"
